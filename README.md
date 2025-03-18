@@ -1,3 +1,6 @@
+Here’s the complete **README.md** file in the exact format you requested, ready to be pasted directly into your repository:
+
+```markdown
 # Steganography Tool - Hide and Extract Secret Messages in Files
 
 This project is a **Flask-based web application** that allows users to hide and extract secret messages in various file formats (images, text files, PDFs, DOCX files, audio, and video) using **steganography** techniques. The tool supports password protection for added security.
@@ -42,59 +45,71 @@ This project is a **Flask-based web application** that allows users to hide and 
    ```bash
    git clone https://github.com/hritikranjan1/SteganoVault.git
    cd SteganoVault
+   ```
+
 2. **Install Dependencies**:
    ```bash
    pip install -r requirements.txt
+   ```
+
 3. **Run the Application**:
- ```bash
- python app.py
+   ```bash
+   python app.py
+   ```
 
 4. **Access the Application**:
- Open your browser and navigate to:
+   Open your browser and navigate to:
+   ```
+   http://127.0.0.1:5000
+   ```
 
-Copy
-http://127.0.0.1:5000
-Usage
-Encoding a Message
-Select a File:
+---
 
-Choose a file (image, text, PDF, DOCX, audio, or video) from your computer.
+## Usage
 
-Enter a Message:
+### Encoding a Message
 
-Type the secret message you want to hide in the file.
+1. **Select a File**:
+   - Choose a file (image, text, PDF, DOCX, audio, or video) from your computer.
 
-Set a Password (Optional):
+2. **Enter a Message**:
+   - Type the secret message you want to hide in the file.
 
-Add a password to protect the hidden message.
+3. **Set a Password** (Optional):
+   - Add a password to protect the hidden message.
 
-Encode:
+4. **Encode**:
+   - Click the "Encode" button. The encoded file will be downloaded automatically.
 
-Click the "Encode" button. The encoded file will be downloaded automatically.
+### Decoding a Message
 
-Decoding a Message
-Upload an Encoded File:
+1. **Upload an Encoded File**:
+   - Choose the file that contains the hidden message.
 
-Choose the file that contains the hidden message.
+2. **Enter the Password** (if applicable):
+   - If the message was password-protected, enter the password.
 
-Enter the Password (if applicable):
+3. **Decode**:
+   - Click the "Decode" button. The hidden message will be displayed on the screen.
 
-If the message was password-protected, enter the password.
+---
 
-Decode:
+## Supported File Formats and Techniques
 
-Click the "Decode" button. The hidden message will be displayed on the screen.
+| File Type | Encoding Technique                          | Decoding Technique                          |
+|-----------|---------------------------------------------|---------------------------------------------|
+| Image     | LSB (Least Significant Bit) Steganography   | LSB Extraction                              |
+| Text      | Zero-Width Character Steganography          | Zero-Width Character Extraction             |
+| PDF       | Metadata Embedding                          | Metadata Extraction                         |
+| DOCX      | Hidden Text Formatting                      | Hidden Text Extraction                      |
+| Audio     | LSB Steganography (WAV only)                | LSB Extraction                              |
+| Video     | LSB Steganography (Blue Channel)            | LSB Extraction                              |
 
-Supported File Formats and Techniques
-File Type	Encoding Technique	Decoding Technique
-Image	LSB (Least Significant Bit) Steganography	LSB Extraction
-Text	Zero-Width Character Steganography	Zero-Width Character Extraction
-PDF	Metadata Embedding	Metadata Extraction
-DOCX	Hidden Text Formatting	Hidden Text Extraction
-Audio	LSB Steganography (WAV only)	LSB Extraction
-Video	LSB Steganography (Blue Channel)	LSB Extraction
-Project Structure
-Copy
+---
+
+## Project Structure
+
+```
 SteganoVault/
 ├── app.py                  # Main Flask application
 ├── requirements.txt        # List of dependencies
@@ -102,38 +117,44 @@ SteganoVault/
 ├── templates/              # HTML templates
 │   └── index.html          # Main UI template
 └── static/                 # Static files (CSS, JS, etc.)
-Dependencies
-Flask: Web framework
+```
 
-Pillow: Image processing
+---
 
-stegano: LSB steganography for images
+## Dependencies
 
-PyPDF2: PDF metadata manipulation
+- Flask: Web framework
+- Pillow: Image processing
+- stegano: LSB steganography for images
+- PyPDF2: PDF metadata manipulation
+- python-docx: DOCX file manipulation
+- pydub: Audio file processing
+- opencv-python: Video file processing
+- numpy: Numerical operations for video processing
 
-python-docx: DOCX file manipulation
+---
 
-pydub: Audio file processing
+## Contributing
 
-opencv-python: Video file processing
-
-numpy: Numerical operations for video processing
-
-Contributing
 Contributions are welcome! If you'd like to contribute, please follow these steps:
 
-Fork the repository.
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes.
+4. Submit a pull request.
 
-Create a new branch for your feature or bugfix.
+---
 
-Commit your changes.
+## License
 
-Submit a pull request.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+---
 
-Acknowledgments
-Inspired by steganography techniques and tools.
+## Acknowledgments
 
-Built with Flask and Python.
+- Inspired by steganography techniques and tools.
+- Built with Flask and Python.
+```
+
+---
