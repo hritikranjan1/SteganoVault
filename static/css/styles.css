@@ -1,0 +1,18 @@
+/* Dark Mode */
+.dark {
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+
+/* Drag & Drop */
+.drop-zone {
+    background-color: #f3f4f6;
+    border: 2px dashed #6b7280;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.drop-zone.dragover {
+    background-color: #d1d5db;
+}

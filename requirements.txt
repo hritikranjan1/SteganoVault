@@ -1,0 +1,9 @@
+Flask
+Pillow
+stegano
+PyPDF2
+python-docx
+pydub
+opencv-python 
+numpy
+#pip install flask pillow stegano PyPDF2 python-docx pydub
