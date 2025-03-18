@@ -145,7 +145,6 @@ Contributions are welcome! If you'd like to contribute, please follow these step
 
 - Inspired by steganography techniques and tools.
 - Built with Flask and Python.
-```
 
 ### How to Use This README
 
