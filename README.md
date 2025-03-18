@@ -1,5 +1,3 @@
-Here’s the complete **README.md** file in the exact format you requested, ready to be pasted directly into your repository:
-
 ```markdown
 # Steganography Tool - Hide and Extract Secret Messages in Files
 
