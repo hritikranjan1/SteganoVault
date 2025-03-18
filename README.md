@@ -147,8 +147,6 @@ Contributions are welcome! If you'd like to contribute, please follow these step
 - Built with Flask and Python.
 ```
 
----
-
 ### How to Use This README
 
 1. Replace the repository URL (`https://github.com/hritikranjan1/SteganoVault.git`) with your actual repository URL if needed.
