@@ -1,4 +1,3 @@
-```markdown
 # Steganography Tool - Hide and Extract Secret Messages in Files
 
 This project is a **Flask-based web application** that allows users to hide and extract secret messages in various file formats (images, text files, PDFs, DOCX files, audio, and video) using **steganography** techniques. The tool supports password protection for added security.
@@ -43,7 +42,6 @@ This project is a **Flask-based web application** that allows users to hide and 
    ```bash
    git clone https://github.com/hritikranjan1/SteganoVault.git
    cd SteganoVault
-   ```
 
 2. **Install Dependencies**:
    ```bash
