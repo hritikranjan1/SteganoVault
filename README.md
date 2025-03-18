@@ -141,16 +141,19 @@ Contributions are welcome! If you'd like to contribute, please follow these step
 
 ---
 
-## License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## Acknowledgments
 
 - Inspired by steganography techniques and tools.
 - Built with Flask and Python.
 ```
 
+---
+
+### How to Use This README
+
+1. Replace the repository URL (`https://github.com/hritikranjan1/SteganoVault.git`) with your actual repository URL if needed.
+2. Save this content in a file named `README.md` in the root directory of your project.
+3. If you have a `LICENSE` file, ensure it’s included in the root directory and update the link in the **License** section accordingly.
+
+This README provides a professional and user-friendly overview of your project. Let me know if you need further assistance!
 ---
