@@ -7,8 +7,6 @@ from stegano import lsb
 from PyPDF2 import PdfReader, PdfWriter
 from docx import Document
 from pydub import AudioSegment
-import wave
-import struct
 import cv2
 import numpy as np
 
@@ -217,7 +215,7 @@ def decode_audio(input_path, password):
             byte = binary_message[i:i+8]
             if not byte:
                 break
-            extracted_message += chr(int(byte,2))
+            extracted_message += chr(int(byte, 2))
         
         # Remove trailing null characters
         extracted_message = extracted_message.rstrip('\x00')
