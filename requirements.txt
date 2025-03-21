@@ -6,4 +6,6 @@ python-docx
 pydub
 opencv-python 
 numpy
+opencv-python>=4.5.0
+mutagen>=1.46.0
 #pip install flask pillow stegano PyPDF2 python-docx pydub
