@@ -8,6 +8,8 @@ from PyPDF2 import PdfReader, PdfWriter
 from docx import Document
 from pydub import AudioSegment
 import cv2
+from pydub import AudioSegment
+import hashlib
 import numpy as np
 
 app = Flask(__name__)
@@ -159,6 +161,7 @@ def decode_pdf(input_path, password):
         print(f"PDF Decoding Error: {e}")
         return "❌ Error decoding PDF!"
 
+
 def convert_to_wav(input_path):
     """Convert audio file to WAV format."""
     try:
@@ -170,6 +173,7 @@ def convert_to_wav(input_path):
         print(f"Audio Conversion Error: {e}")
         return None
 
+
 def encode_audio(input_path, message, password):
     """Embed a hidden message in an audio file."""
     try:
@@ -177,19 +181,25 @@ def encode_audio(input_path, message, password):
             input_path = convert_to_wav(input_path)
         if not input_path:
             return None
-        
-        secret_message = f"{password}:{message}" if password else message
-        binary_message = ''.join(format(ord(c), '08b') for c in secret_message)
-        
+
+        # Hash the password for secure storage
+        hashed_password = hashlib.sha256(password.encode()).hexdigest() if password else ""
+        secret_message = f"{hashed_password}:{message}" if password else message
+
+        # Prefix the message with its length
+        message_length = len(secret_message)
+        binary_length = format(message_length, '032b')  # 32-bit length prefix
+        binary_message = binary_length + ''.join(format(ord(c), '08b') for c in secret_message)
+
         audio = AudioSegment.from_file(input_path)
         samples = audio.get_array_of_samples()
-        
+
         if len(binary_message) > len(samples):
             return "❌ Message too large for the audio file!"
-        
+
         for i in range(len(binary_message)):
-            samples[i] = samples[i] & ~1 | int(binary_message[i])
-        
+            samples[i] = (samples[i] & ~1) | int(binary_message[i])
+
         encoded_audio = audio._spawn(samples)
         output_path = input_path.replace(".", "_encoded.", 1)
         encoded_audio.export(output_path, format="wav")
@@ -197,6 +207,7 @@ def encode_audio(input_path, message, password):
     except Exception as e:
         print(f"Audio Encoding Error: {e}")
         return None
+
 
 def decode_audio(input_path, password):
     """Extract a hidden message from an audio file."""
@@ -208,26 +219,34 @@ def decode_audio(input_path, password):
 
         audio = AudioSegment.from_file(input_path)
         samples = audio.get_array_of_samples()
-        
-        binary_message = ''.join(str(sample & 1) for sample in samples)
+
+        # Extract the length of the message
+        binary_length = ''.join(str(sample & 1) for sample in samples[:32])
+        message_length = int(binary_length, 2)
+
+        # Extract the message
+        binary_message = ''.join(str(sample & 1) for sample in samples[32:32 + message_length * 8])
         extracted_message = ''
         for i in range(0, len(binary_message), 8):
-            byte = binary_message[i:i+8]
+            byte = binary_message[i:i + 8]
             if not byte:
                 break
             extracted_message += chr(int(byte, 2))
-        
+
         # Remove trailing null characters
         extracted_message = extracted_message.rstrip('\x00')
-        
+
         if extracted_message and ":" in extracted_message:
             stored_password, stored_message = extracted_message.split(":", 1)
-            return stored_message if stored_password == password else "❌ Incorrect password!"
-        
+            # Hash the provided password for comparison
+            hashed_password = hashlib.sha256(password.encode()).hexdigest() if password else ""
+            return stored_message if stored_password == hashed_password else "❌ Incorrect password!"
+
         return extracted_message if extracted_message else "❌ No hidden message found!"
     except Exception as e:
         print(f"Audio Decoding Error: {e}")
         return "❌ Error decoding audio!"
+
 
 def encode_video(input_path, message, password):
     """Embed a hidden message in a video file."""
