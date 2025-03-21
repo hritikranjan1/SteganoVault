@@ -24,7 +24,7 @@ def convert_to_png(input_path):
     except Exception as e:
         print(f"Image Conversion Error: {e}")
         return None
-
+# IMAGE SECTION
 def encode_image(input_path, message, password):
     """Embed a message in an image."""
     try:
@@ -56,6 +56,7 @@ def decode_image(input_path, password):
         print(f"Image Decoding Error: {e}")
         return "❌ Error decoding image!"
 
+# TEXT SECTION
 def encode_txt(input_path, message, password):
     """Embed a hidden message in a text file using zero-width characters."""
     try:
@@ -93,6 +94,7 @@ def decode_txt(input_path, password):
         print(f"TXT Decoding Error: {e}")
         return "❌ Error decoding TXT!"
 
+# DOCX SECTION
 def encode_docx(input_path, message, password):
     """Embed a hidden message in a DOCX file using hidden text formatting."""
     try:
@@ -128,6 +130,7 @@ def decode_docx(input_path, password):
         print(f"DOCX Decoding Error: {e}")
         return "❌ Error decoding DOCX!"
 
+# PDF SECTION
 def encode_pdf(input_path, message, password):
     """Embed a hidden message in a PDF file."""
     try:
@@ -161,7 +164,7 @@ def decode_pdf(input_path, password):
         print(f"PDF Decoding Error: {e}")
         return "❌ Error decoding PDF!"
 
-
+# AUDIO SECTION
 def convert_to_wav(input_path):
     """Convert audio file to WAV format."""
     try:
@@ -247,82 +250,101 @@ def decode_audio(input_path, password):
         print(f"Audio Decoding Error: {e}")
         return "❌ Error decoding audio!"
 
+# VIDEO SECTION
+import cv2  # Still used for basic video validation
+from mutagen.mp4 import MP4, MP4Cover
+import base64
+import os
+
 
 def encode_video(input_path, message, password):
-    """Embed a hidden message in a video file."""
+    """Embed a hidden message in the video file's metadata."""
     try:
-        secret_message = f"{password}:{message}" if password else message
-        binary_message = ''.join(format(ord(c), '08b') for c in secret_message)
-        
-        # Open the video file
+        # Validate input video
         cap = cv2.VideoCapture(input_path)
-        frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        fps = int(cap.get(cv2.CAP_PROP_FPS))
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Use 'mp4v' for MP4 format
-        output_path = input_path.replace(".", "_encoded.", 1)
-        out = cv2.VideoWriter(output_path, fourcc, fps, (frame_width, frame_height))
-        
-        frame_index = 0
-        while cap.isOpened():
-            ret, frame = cap.read()
-            if not ret:
-                break
-            
-            # Embed the message in the least significant bit of the blue channel
-            if frame_index < len(binary_message):
-                for i in range(frame.shape[0]):
-                    for j in range(frame.shape[1]):
-                        if frame_index < len(binary_message):
-                            # Modify only the blue channel (0th index in OpenCV's BGR format)
-                            frame[i, j, 0] = (frame[i, j, 0] & ~1) | int(binary_message[frame_index])
-                            frame_index += 1
-            
-            out.write(frame)
-        
+        if not cap.isOpened():
+            raise ValueError("Could not open input video file")
         cap.release()
-        out.release()
+
+        # Prepare the secret message with password
+        secret_message = f"{password}:{message}" if password else message
+        # Encode message as base64 to handle arbitrary data safely
+        encoded_message = base64.b64encode(secret_message.encode('utf-8')).decode('utf-8')
+
+        # Output path
+        output_path = input_path.replace(".", "_encoded.", 1)
+
+        # Copy the original video to a new file
+        if not os.path.exists(input_path):
+            raise FileNotFoundError("Input video file not found")
+        with open(input_path, 'rb') as src, open(output_path, 'wb') as dst:
+            dst.write(src.read())
+
+        # Open the new video file with mutagen
+        video = MP4(output_path)
+
+        # Embed the message in a custom metadata field (e.g., 'desc' or a custom key)
+        video['desc'] = encoded_message  # 'desc' is a standard MP4 tag for description
+        video.save()
+
+        # Verify the output file
+        test_cap = cv2.VideoCapture(output_path)
+        if not test_cap.isOpened():
+            raise ValueError("Encoded video file is corrupted")
+        test_cap.release()
+
+        print(f"Video encoded successfully: {output_path}")
         return output_path
+
     except Exception as e:
         print(f"Video Encoding Error: {e}")
         return None
 
+
 def decode_video(input_path, password):
-    """Extract a hidden message from a video file."""
+    """Extract a hidden message from the video file's metadata."""
     try:
+        # Validate video file
         cap = cv2.VideoCapture(input_path)
-        binary_message = ''
-        
-        while cap.isOpened():
-            ret, frame = cap.read()
-            if not ret:
-                break
-            
-            # Extract the message from the least significant bit of the blue channel
-            for i in range(frame.shape[0]):
-                for j in range(frame.shape[1]):
-                    binary_message += str(frame[i, j, 0] & 1)
-        
+        if not cap.isOpened():
+            raise ValueError("Could not open video file")
         cap.release()
-        
-        extracted_message = ''
-        for i in range(0, len(binary_message), 8):
-            byte = binary_message[i:i+8]
-            if not byte:
-                break
-            extracted_message += chr(int(byte, 2))
-        
-        # Remove trailing null characters
-        extracted_message = extracted_message.rstrip('\x00')
-        
-        if extracted_message and ":" in extracted_message:
+
+        # Open the video file with mutagen
+        video = MP4(input_path)
+
+        # Check for the custom metadata field
+        if 'desc' not in video:
+            return "❌ No hidden message found!"
+
+        # Extract and decode the message
+        encoded_message = video['desc'][0]
+        decoded_bytes = base64.b64decode(encoded_message.encode('utf-8'))
+        extracted_message = decoded_bytes.decode('utf-8')
+
+        # Handle password and message
+        if ":" in extracted_message:
             stored_password, stored_message = extracted_message.split(":", 1)
             return stored_message if stored_password == password else "❌ Incorrect password!"
-        
+
         return extracted_message if extracted_message else "❌ No hidden message found!"
+
     except Exception as e:
         print(f"Video Decoding Error: {e}")
         return "❌ Error decoding video!"
+
+
+# Example usage
+if __name__ == "__main__":
+    input_video = "input_video.mp4"
+    secret_message = "Hello, this is a hidden message!"
+    password = "secret123"
+
+    encoded_file = encode_video(input_video, secret_message, password)
+    if encoded_file:
+        decoded_message = decode_video(encoded_file, password)
+        print(f"Decoded message: {decoded_message}")
+
 
 @app.route("/")
 def index():
