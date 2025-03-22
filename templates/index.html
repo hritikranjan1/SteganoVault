@@ -8,33 +8,31 @@
     <script defer src="https://unpkg.com/@motionone/dom"></script>
     <style>
         /* Theme Variables Section */
-        /* Defines color variables for dark and light themes */
         [data-theme="dark"] {
-            --bg-color: #1a202c;        /* Main background color */
-            --text-color: #e2e8f0;      /* Text color */
-            --card-bg: #2d3748;         /* Background for cards and boxes */
-            --button-bg: #4a5568;       /* Button background */
-            --hover-bg: #4a5568;        /* Hover state background */
-            --message-bg: #2d3748;      /* Message container background */
-            --scrollbar-bg: #4a5568;    /* Scrollbar color */
+            --bg-color: #1a202c;
+            --text-color: #e2e8f0;
+            --card-bg: #2d3748;
+            --button-bg: #4a5568;
+            --hover-bg: #718096; /* Updated for better hover contrast */
+            --message-bg: #2d3748;
+            --scrollbar-bg: #4a5568;
         }
 
         [data-theme="light"] {
-            --bg-color: #f8fafc;        /* Main background color */
-            --text-color: #1a202c;      /* Text color */
-            --card-bg: #ffffff;         /* Background for cards and boxes */
-            --button-bg: #4299e1;       /* Button background */
-            --hover-bg: #3182ce;        /* Hover state background */
-            --message-bg: #f7fafc;      /* Message container background */
-            --scrollbar-bg: #cbd5e0;    /* Scrollbar color */
+            --bg-color: #f8fafc;
+            --text-color: #1a202c;
+            --card-bg: #ffffff;
+            --button-bg: #4299e1;
+            --hover-bg: #3182ce;
+            --message-bg: #f7fafc;
+            --scrollbar-bg: #cbd5e0;
         }
 
         /* Body/Base Styling Section */
-        /* Sets up the overall page layout and theme transitions */
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background 0.5s, color 0.5s; /* Smooth theme switch */
+            transition: background 0.5s, color 0.5s;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -42,7 +40,6 @@
         }
 
         /* Animation Section */
-        /* Defines fade-in animation for elements */
         .motion-fade {
             animation: fadeIn 1s ease-in-out;
         }
@@ -53,40 +50,37 @@
         }
 
         /* Button Styling Section */
-        /* Styles for buttons with hover effects */
         .motion-button {
             transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
         }
 
         .motion-button:hover {
-            transform: scale(1.05);          /* Slight scale-up on hover */
+            transform: scale(1.05);
             background-color: var(--hover-bg);
         }
 
         /* File Upload Box Section */
-        /* Styles for the drag-and-drop file upload area */
         #drop-area {
-            border: 2px dashed var(--scrollbar-bg); /* Consistent border color */
+            border: 2px dashed var(--scrollbar-bg);
             border-radius: 10px;
             padding: 10px;
-            transition: background-color 0.3s ease-in-out; /* Smooth hover transition */
+            transition: background-color 0.3s ease-in-out;
         }
 
-        #drop-area:hover {
-            background-color: var(--hover-bg); /* Hover state background */
+        #drop-area.dragover {
+            background-color: var(--hover-bg); /* Updated to use variable */
         }
 
         /* File Name Display Section */
-        /* Styles for the file name text inside upload box */
         .file-name {
             margin-top: 12px;
             font-weight: bold;
             color: var(--text-color);
             font-size: 1.1rem;
+            word-break: break-all;
         }
 
         /* Contributors Box Section */
-        /* Styles for the contributors section, treated as a flex container box */
         .contributors {
             display: flex;
             justify-content: center;
@@ -94,7 +88,7 @@
             margin-top: 30px;
             opacity: 0;
             transform: translateY(-20px);
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Slide-in effect */
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .contributors.show {
@@ -111,11 +105,10 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid var(--button-bg); /* Circular image with border */
+            border: 3px solid var(--button-bg);
         }
 
         /* Background Animation Section */
-        /* Full-page background animation overlay */
         .background-animation {
             position: absolute;
             top: 0;
@@ -129,7 +122,6 @@
         }
 
         /* Footer Section */
-        /* Footer container styling */
         .footer {
             margin-top: auto;
             text-align: center;
@@ -137,12 +129,11 @@
         }
 
         /* Important Note Box Section */
-        /* Styles for the warning/info box in the footer */
         .important-note {
-            background-color: #fff3cd;          /* Light yellow background */
-            color: #856404;                     /* Dark yellow text */
+            background-color: #fff3cd;
+            color: #856404;
             padding: 20px;
-            border-left: 4px solid #ffc107;     /* Yellow border accent */
+            border-left: 4px solid #ffc107;
             border-radius: 4px;
             margin-top: 30px;
             max-width: 900px;
@@ -151,7 +142,6 @@
         }
 
         /* Grid Section (How It Works Boxes) */
-        /* Container for grid layout of informational cards/boxes */
         .grid-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -162,20 +152,19 @@
         }
 
         /* Grid Card Box Section */
-        /* Individual card/box styles within the grid with scrollbar */
         .grid-card {
             background-color: var(--card-bg);
             border-radius: 10px;
             padding: 25px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover lift effect */
-            max-height: 400px;                  /* Fixed height for scrolling */
-            overflow-y: auto;                   /* Enable vertical scrollbar */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .grid-card:hover {
-            transform: translateY(-5px);        /* Lift up on hover */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .grid-card h3 {
@@ -197,8 +186,6 @@
             margin-bottom: 12px;
         }
 
-        /* Scrollbar Styling for Grid Cards */
-        /* Customizes the scrollbar appearance */
         .grid-card::-webkit-scrollbar {
             width: 10px;
         }
@@ -217,22 +204,19 @@
         }
 
         /* Message Container Box Section */
-        /* Styles for the decoded message display box */
         .message-container {
             background-color: var(--message-bg);
             border-radius: 10px;
             padding: 15px;
             margin-top: 15px;
-            max-height: 200px;                  /* Scrollable height */
+            max-height: 200px;
             overflow-y: auto;
             border: 1px solid var(--scrollbar-bg);
             color: var(--text-color);
-            white-space: pre-wrap;              /* Preserves text formatting */
+            white-space: pre-wrap;
             font-size: 1.1rem;
         }
 
-        /* Scrollbar Styling for Message Container */
-        /* Customizes the scrollbar appearance */
         .message-container::-webkit-scrollbar {
             width: 10px;
         }
@@ -249,55 +233,105 @@
         .message-container::-webkit-scrollbar-thumb:hover {
             background: var(--hover-bg);
         }
+
+        /* Popup Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 15% auto;
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: var(--text-color);
+        }
+
+        .close {
+            color: var(--text-color);
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--hover-bg);
+            text-decoration: none;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 640px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.25rem; }
+            .grid-section { grid-template-columns: 1fr; }
+            #drop-area { padding: 8px; }
+            .motion-button { padding: 0.5rem 1rem; font-size: 0.875rem; }
+            .contributor img { width: 80px; height: 80px; }
+            .modal-content { margin: 10% auto; width: 95%; }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.25rem; }
+            .grid-section { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body class="flex flex-col items-center justify-between">
-
     <div class="background-animation"></div>
 
-<!-- Navigation Bar -->
-<!-- Adjusted spacing: Reduced mx-5 to mx-3 and space-x-5 to space-x-3 to bring boxes closer on x-axis -->
-<!-- Standardized padding: Changed px-5 py-3 to px-4 py-2 on theme-toggle for equal alignment on both axes -->
-<!-- Made smaller: Reduced padding to px-3 py-1 and font size to text-base; Added mt-4 to separate from top border -->
-<!-- Ensured GitHub follows Contributors: Placed GitHub link immediately after Contributors with consistent spacing -->
-<!-- Added gap from page edges: Added px-4 to nav for 16px padding on left and right sides -->
-<!-- Unified rounded corners: Applied rounded-lg to all boxes for consistent corner radius -->
-<nav class="w-full flex justify-between items-center mb-6 mt-4 px-4">
-    <div class="flex items-center">
-        <button id="theme-toggle" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-            ☀️ Light Mode
-        </button>
-        <a href="#steganovault" class="text-xl font-bold mx-3 bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-            SteganoVault
-        </a>
-    </div>
-    <div class="space-x-3">
-        <a href="#encode-decode" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-            Encode/Decode
-        </a>
-        <a href="#how-it-works" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-            How It Works
-        </a>
-        <a href="#contributors" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-            Contributors
-        </a>
-        <a href="https://github.com/hritikranjan1/SteganoVault.git" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-            GitHub
-        </a>
-    </div>
-</nav>
+    <!-- Navigation Bar -->
+    <nav class="w-full flex justify-between items-center mb-6 mt-4 px-4">
+        <div class="flex items-center">
+            <button id="theme-toggle" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
+                ☀️ Light Mode
+            </button>
+            <a href="#steganovault" class="text-xl font-bold mx-3 bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
+                SteganoVault
+            </a>
+        </div>
+        <div class="space-x-3">
+            <a href="#encode-decode" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
+                Encode/Decode
+            </a>
+            <a href="#how-it-works" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
+                How It Works
+            </a>
+            <a href="#contributors" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
+                Contributors
+            </a>
+            <a href="https://github.com/hritikranjan1/SteganoVault.git" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
+                GitHub
+            </a>
+        </div>
+    </nav>
 
     <h1 class="text-5xl font-bold mb-8 motion-fade" id="steganovault">🔐 SteganoVault</h1>
     <p class="text-center mb-8 text-lg">Steganography Tool - Hide and Extract Secret Messages in Files(images, text files, PDFs, DOCX files, audio, and video)</p>
 
     <!-- Main App Box (Encode/Decode Section) -->
-    <!-- Changed size: Reduced max-w-4xl to max-w-2xl and p-10 to p-6 for a smaller box -->
-    <!-- Added mb-12 to increase gap between main app box and "How It Works" section -->
     <div class="bg-[var(--card-bg)] shadow-lg rounded-lg p-6 w-full max-w-2xl motion-fade mb-12" id="encode-decode">
-        <h2 class="text-4xl font-semibold mb-8">Encode / Decode</h2>
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-4xl font-semibold flex-1 text-center">Encode / Decode</h2>
+            <button id="infoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-xl">ℹ️</button>
+        </div>
 
         <!-- Drag & Drop File Upload -->
-        <div id="drop-area" class="border-2 border-dashed border-gray-400 rounded-lg p-10 text-center motion-fade hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors duration-300 ease-in-out">
+        <div id="drop-area" class="border-2 border-dashed border-[var(--scrollbar-bg)] rounded-lg p-10 text-center motion-fade">
             <p class="mb-4 text-xl">📂 Drag & Drop your file here</p>
             <input type="file" id="fileInput" class="hidden" accept=".png,.jpg,.jpeg,.txt,.mp3,.wav,.pdf,.docx,.mp4,.avi,.mov">
             <button onclick="document.getElementById('fileInput').click()" class="bg-[var(--button-bg)] text-white px-6 py-4 rounded hover:bg-[var(--hover-bg)] transition-colors motion-button text-xl">
@@ -319,6 +353,27 @@
 
         <div id="output" class="mt-8 text-center text-xl"></div>
         <div id="messageContainer" class="message-container hidden"></div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3 class="text-xl font-semibold mb-4">How to Share Your Encoded File</h3>
+            <p class="text-base">
+                Share the downloaded encoded file with your friend via a method that preserves the file as-is, such as:
+            </p>
+            <ul class="list-disc ml-5 mt-2 mb-4">
+                <li><b>Google Drive:</b> Upload the file and share the link.</li>
+                <li><b>Email:</b> Attach the file to an email.</li>
+            </ul>
+            <p class="text-base">
+                <b>Important:</b> Avoid compression-based apps like WhatsApp, as they may alter the file and break the hidden message.
+            </p>
+            <p class="text-base mt-2">
+                If you used a password, share it with your friend separately (e.g., via a secure chat).
+            </p>
+        </div>
     </div>
 
     <!-- How It Works Section -->
@@ -442,7 +497,7 @@
         </div>
     </div>
 
-    <!-- Important Note -->
+    <!-- Footer Section -->
     <div class="footer">
         <div class="important-note">
             <h3 class="text-xl font-semibold">Important Note</h3>
@@ -450,15 +505,8 @@
                 This tool is intended for educational and entertainment purposes only. It is not a secure encryption method and should not be used for sensitive or confidential information. For secure communication, consider using proper encryption tools.
             </p>
         </div>
+        <p class="text-lg mt-4">© 2025 SteganoVault. Some rights reserved. Built with ❤️</p>
     </div>
-
-    <footer>
-        <div class="footer-bottom">
-            <p class="text-lg">© 2025 SteganoVault. Some rights reserved. Built with ❤️
-                <i class="fas fa-heart" style="color: var(--danger)"></i>
-            </p>
-        </div>
-    </footer>
 
     <script>
         // Dark Mode Toggle
@@ -474,103 +522,136 @@
         });
 
         // Drag & Drop Feature
-        let dropArea = document.getElementById("drop-area");
-        let fileNameDisplay = document.getElementById("fileName");
+        const dropArea = document.getElementById("drop-area");
+        const fileInput = document.getElementById("fileInput");
+        const fileNameDisplay = document.getElementById("fileName");
 
-        dropArea.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            dropArea.classList.add("bg-gray-300", "dark:bg-gray-700");
+        ['dragenter', 'dragover'].forEach(event => {
+            dropArea.addEventListener(event, (e) => {
+                e.preventDefault();
+                dropArea.classList.add('dragover');
+            });
         });
 
-        dropArea.addEventListener("dragleave", () => {
-            dropArea.classList.remove("bg-gray-300", "dark:bg-gray-700");
+        ['dragleave', 'drop'].forEach(event => {
+            dropArea.addEventListener(event, (e) => {
+                e.preventDefault();
+                dropArea.classList.remove('dragover');
+            });
         });
 
-        dropArea.addEventListener("drop", (e) => {
-            e.preventDefault();
-            dropArea.classList.remove("bg-gray-300", "dark:bg-gray-700");
-            let files = e.dataTransfer.files;
-            document.getElementById("fileInput").files = files;
-            fileNameDisplay.textContent = files[0].name;
-        });
-
-        document.getElementById("fileInput").addEventListener("change", (e) => {
-            if (e.target.files.length > 0) {
-                fileNameDisplay.textContent = e.target.files[0].name;
+        dropArea.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (files.length) {
+                fileInput.files = files;
+                fileNameDisplay.textContent = files[0].name;
             }
         });
 
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                fileNameDisplay.textContent = fileInput.files[0].name;
+            }
+        });
+
+        // Encode Function
         function encode() {
-            let file = document.getElementById("fileInput").files[0];
-            let message = document.getElementById("messageInput").value;
-            let password = document.getElementById("passwordInput").value;
+            const file = fileInput.files[0];
+            const message = document.getElementById("messageInput").value;
+            const password = document.getElementById("passwordInput").value;
+            const output = document.getElementById("output");
 
             if (!file || !message) {
                 alert("Please select a file and enter a message!");
                 return;
             }
 
-            let formData = new FormData();
+            const formData = new FormData();
             formData.append("file", file);
             formData.append("message", message);
             formData.append("password", password);
 
+            output.innerHTML = "<p class='text-yellow-500'>⏳ Encoding...</p>";
             fetch("/encode", { method: "POST", body: formData })
-            .then(response => response.blob())
-            .then(blob => {
-                let url = window.URL.createObjectURL(blob);
-                let a = document.createElement("a");
-                a.href = url;
-                a.download = "encoded_" + file.name;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                document.getElementById("output").innerHTML = "<p class='text-green-500'>✅ File encoded successfully! Downloading...</p>";
-                document.getElementById("messageContainer").classList.add("hidden");
-
-                document.getElementById("messageInput").value = '';
-                document.getElementById("passwordInput").value = '';
-                fileNameDisplay.textContent = '';
-            })
-            .catch(error => {
-                document.getElementById("output").innerHTML = "<p class='text-red-500'>❌ Error encoding file.</p>";
-            });
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "encoded_" + file.name;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    output.innerHTML = "<p class='text-green-500'>✅ File encoded successfully! Downloading...</p>";
+                    document.getElementById("messageContainer").classList.add("hidden");
+                    resetForm();
+                })
+                .catch(error => {
+                    output.innerHTML = "<p class='text-red-500'>❌ Error encoding file.</p>";
+                });
         }
 
+        // Decode Function
         function decode() {
-            let file = document.getElementById("fileInput").files[0];
-            let password = document.getElementById("passwordInput").value;
+            const file = fileInput.files[0];
+            const password = document.getElementById("passwordInput").value;
+            const output = document.getElementById("output");
+            const messageContainer = document.getElementById("messageContainer");
 
             if (!file) {
                 alert("Please select a file to decode!");
                 return;
             }
 
-            let formData = new FormData();
+            const formData = new FormData();
             formData.append("file", file);
             formData.append("password", password);
 
+            output.innerHTML = "<p class='text-yellow-500'>⏳ Decoding...</p>";
             fetch("/decode", { method: "POST", body: formData })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("output").innerHTML = "<p class='text-blue-500'>🔓 Decoded Successfully</p>";
-                let messageContainer = document.getElementById("messageContainer");
-                messageContainer.textContent = data.message;
-                messageContainer.classList.remove("hidden");
-
-                document.getElementById("messageInput").value = '';
-                document.getElementById("passwordInput").value = '';
-                fileNameDisplay.textContent = '';
-            })
-            .catch(error => {
-                document.getElementById("output").innerHTML = "<p class='text-red-500'>❌ Error decoding file.</p>";
-                document.getElementById("messageContainer").classList.add("hidden");
-            });
+                .then(response => response.json())
+                .then(data => {
+                    output.innerHTML = "<p class='text-blue-500'>🔓 Decoded Successfully</p>";
+                    messageContainer.textContent = data.message;
+                    messageContainer.classList.remove("hidden");
+                    resetForm();
+                })
+                .catch(error => {
+                    output.innerHTML = "<p class='text-red-500'>❌ Error decoding file.</p>";
+                    messageContainer.classList.add("hidden");
+                });
         }
 
-        window.onload = function() {
-            const contributors = document.querySelector('.contributors');
-            contributors.classList.add('show');
+        // Reset Form Function
+        function resetForm() {
+            document.getElementById("messageInput").value = '';
+            document.getElementById("passwordInput").value = '';
+            fileInput.value = '';
+            fileNameDisplay.textContent = '';
+        }
+
+        // Popup Modal Functionality
+        const modal = document.getElementById('infoModal');
+        const infoBtn = document.getElementById('infoBtn');
+        const closeBtn = document.querySelector('.close');
+
+        infoBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Contributors Animation
+        window.onload = () => {
+            document.querySelector('.contributors').classList.add('show');
         };
     </script>
 </body>
