@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SteganoVault - Steganography Tool</title>
+    <head>
+        <title>SteganoVault - Secret Hiding Hub</title>
+        <link rel="icon" type="image/png" href="https://github.com/hritikranjan1/Imagehosting/blob/main/ChatGPT%20Image%20Mar%2031,%202025,%2011_47_08%20AM.png?raw=true">
+    </head>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/@motionone/dom"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Theme Variables Section */
         [data-theme="dark"] {
             --bg-color: #1a202c;
             --text-color: #e2e8f0;
             --card-bg: #2d3748;
             --button-bg: #4a5568;
-            --hover-bg: #718096; /* Updated for better hover contrast */
+            --hover-bg: #718096;
             --message-bg: #2d3748;
             --scrollbar-bg: #4a5568;
+            --glow-color: #00ffcc;
         }
 
         [data-theme="light"] {
@@ -26,66 +32,263 @@
             --hover-bg: #3182ce;
             --message-bg: #f7fafc;
             --scrollbar-bg: #cbd5e0;
+            --glow-color: #ff6b6b;
         }
 
-        /* Body/Base Styling Section */
+        [data-theme="cyberpunk"] {
+            --bg-color: #0d0b1e;
+            --text-color: #00ffcc;
+            --card-bg: #1a1433;
+            --button-bg: #ff007a;
+            --hover-bg: #ff4da6;
+            --message-bg: #1a1433;
+            --scrollbar-bg: #00ffcc;
+            --glow-color: #ff00ff;
+        }
+
+        [data-theme="retro-spy"] {
+            --bg-color: #2b2b2b;
+            --text-color: #f5f5f5;
+            --card-bg: #3c3c3c;
+            --button-bg: #d4a017;
+            --hover-bg: #e6b800;
+            --message-bg: #3c3c3c;
+            --scrollbar-bg: #d4a017;
+            --glow-color: #ffd700;
+        }
+
+        [data-theme="neon-noir"] {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --card-bg: #1e1e1e;
+            --button-bg: #ff1744;
+            --hover-bg: #ff4569;
+            --message-bg: #1e1e1e;
+            --scrollbar-bg: #ff1744;
+            --glow-color: #00e5ff;
+        }
+
+        [data-theme="vaporwave"] {
+            --bg-color: #ff71ce;
+            --text-color: #01cdfe;
+            --card-bg: #b967ff;
+            --button-bg: #05ffa1;
+            --hover-bg: #00e5ff;
+            --message-bg: #b967ff;
+            --scrollbar-bg: #05ffa1;
+            --glow-color: #fffb96;
+        }
+
+        [data-theme="steampunk"] {
+            --bg-color: #2c1e15;
+            --text-color: #d4a017;
+            --card-bg: #3f2a1d;
+            --button-bg: #8b5523;
+            --hover-bg: #a66b33;
+            --message-bg: #3f2a1d;
+            --scrollbar-bg: #d4a017;
+            --glow-color: #ffcc80;
+        }
+
+        [data-theme="hacker-terminal"] {
+            --bg-color: #0a0a0a;
+            --text-color: #00ff00;
+            --card-bg: #1a1a1a;
+            --button-bg: #00cc00;
+            --hover-bg: #33ff33;
+            --message-bg: #1a1a1a;
+            --scrollbar-bg: #00ff00;
+            --glow-color: #00ff00;
+        }
+
+        [data-theme="cosmic-galaxy"] {
+            --bg-color: #0d1b2a;
+            --text-color: #e0e0ff;
+            --card-bg: #1b263b;
+            --button-bg: #778da9;
+            --hover-bg: #a3bffa;
+            --message-bg: #1b263b;
+            --scrollbar-bg: #778da9;
+            --glow-color: #ff00ff;
+        }
+
+        [data-theme="minimal-zen"] {
+            --bg-color: #f0f0f0;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --button-bg: #666666;
+            --hover-bg: #999999;
+            --message-bg: #ffffff;
+            --scrollbar-bg: #cccccc;
+            --glow-color: #66ccff;
+        }
+
+        [data-theme="glitchcore"] {
+            --bg-color: #000000;
+            --text-color: #ff0000;
+            --card-bg: #1a0000;
+            --button-bg: #00ffff;
+            --hover-bg: #00cccc;
+            --message-bg: #1a0000;
+            --scrollbar-bg: #ff00ff;
+            --glow-color: #ff00ff;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background 0.5s, color 0.5s;
+            transition: all 0.5s ease;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            padding: 0.1rem;
+            padding: 0.5rem;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
         }
 
-        /* Animation Section */
         .motion-fade {
             animation: fadeIn 1s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Button Styling Section */
+        .glow-effect {
+            box-shadow: 0 0 10px var(--glow-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
         .motion-button {
-            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .motion-button:hover {
             transform: scale(1.05);
             background-color: var(--hover-bg);
+            box-shadow: 0 0 15px var(--glow-color);
         }
 
-        /* File Upload Box Section */
         #drop-area {
-            border: 2px dashed var(--scrollbar-bg);
-            border-radius: 10px;
-            padding: 10px;
-            transition: background-color 0.3s ease-in-out;
+            border: 3px dashed var(--scrollbar-bg);
+            border-radius: 15px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 100%);
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         #drop-area.dragover {
-            background-color: var(--hover-bg); /* Updated to use variable */
+            background-color: var(--hover-bg);
+            border-color: var(--glow-color);
+            transform: scale(1.02);
         }
 
-        /* File Name Display Section */
         .file-name {
-            margin-top: 12px;
+            margin-top: 0.75rem;
             font-weight: bold;
             color: var(--text-color);
-            font-size: 1.1rem;
+            font-size: 1rem;
             word-break: break-all;
         }
 
-        /* Contributors Box Section */
+        .stealth-score-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .stealth-score {
+            display: inline-block;
+            background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 0 10px var(--glow-color);
+            font-size: 1rem;
+        }
+
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--button-bg);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .send-button.sending {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .send-button.sending::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: sending 1s infinite;
+        }
+
+        @keyframes sending {
+            100% { left: 100%; }
+        }
+
+        .confirmation-message {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .confirmation-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .share-challenge {
+            background: #00cc00;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+            margin: 0.5rem auto;
+            display: block;
+        }
+
+        .share-challenge:hover {
+            background: #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
         .contributors {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
-            margin-top: 30px;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
             opacity: 0;
             transform: translateY(-20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
@@ -97,93 +300,91 @@
         }
 
         .contributor {
-            margin: 15px;
             text-align: center;
+            flex: 1 1 100%;
+            max-width: 200px;
         }
 
         .contributor img {
-            width: 120px;
-            height: 120px;
+            width: 100%;
+            max-width: 120px;
+            height: auto;
             border-radius: 50%;
             border: 3px solid var(--button-bg);
         }
 
-        /* Background Animation Section */
         .background-animation {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://example.com/your-motion-poster.gif') no-repeat center center fixed;
-            background-size: cover;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
             z-index: -1;
-            opacity: 0.5;
+            opacity: 0.2;
         }
 
-        /* Footer Section */
         .footer {
             margin-top: auto;
             text-align: center;
-            padding: 30px;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            width: 100%;
         }
 
-        /* Important Note Box Section */
         .important-note {
             background-color: #fff3cd;
             color: #856404;
-            padding: 20px;
+            padding: 1rem;
             border-left: 4px solid #ffc107;
             border-radius: 4px;
-            margin-top: 30px;
+            margin-top: 1.5rem;
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Grid Section (How It Works Boxes) */
         .grid-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            margin: 50px auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem auto;
             max-width: 1400px;
-            padding: 0 30px;
+            padding: 0 1rem;
         }
 
-        /* Grid Card Box Section */
         .grid-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
             max-height: 400px;
             overflow-y: auto;
         }
 
         .grid-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .grid-card h3 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 0.75rem;
             color: var(--text-color);
         }
 
         .grid-card p {
             color: var(--text-color);
             opacity: 0.9;
-            font-size: 1.05rem;
-            margin-bottom: 12px;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .grid-card ul {
-            margin-left: 20px;
-            margin-bottom: 12px;
+            margin-left: 1.25rem;
+            margin-bottom: 0.75rem;
         }
 
         .grid-card::-webkit-scrollbar {
@@ -203,38 +404,37 @@
             background: var(--hover-bg);
         }
 
-        /* Message Container Box Section */
-        .message-container {
+        .decoded-output-container {
             background-color: var(--message-bg);
             border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
+            padding: 1rem;
+            margin-top: 1rem;
             max-height: 200px;
             overflow-y: auto;
             border: 1px solid var(--scrollbar-bg);
             color: var(--text-color);
             white-space: pre-wrap;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            width: 100%;
         }
 
-        .message-container::-webkit-scrollbar {
+        .decoded-output-container::-webkit-scrollbar {
             width: 10px;
         }
 
-        .message-container::-webkit-scrollbar-track {
+        .decoded-output-container::-webkit-scrollbar-track {
             background: var(--bg-color);
         }
 
-        .message-container::-webkit-scrollbar-thumb {
+        .decoded-output-container::-webkit-scrollbar-thumb {
             background: var(--scrollbar-bg);
             border-radius: 5px;
         }
 
-        .message-container::-webkit-scrollbar-thumb:hover {
+        .decoded-output-container::-webkit-scrollbar-thumb:hover {
             background: var(--hover-bg);
         }
 
-        /* Popup Modal Styling */
         .modal {
             display: none;
             position: fixed;
@@ -249,12 +449,12 @@
 
         .modal-content {
             background-color: var(--card-bg);
-            margin: 15% auto;
-            padding: 1.5rem;
-            border-radius: 10px;
+            margin: 10% auto;
+            padding: 1rem;
+            border-radius: 15px;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            box-shadow: 0 0 20px var(--glow-color);
             color: var(--text-color);
         }
 
@@ -269,25 +469,212 @@
         .close:hover,
         .close:focus {
             color: var(--hover-bg);
-            text-decoration: none;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 640px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 1.75rem; }
+        .game-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+        }
+
+        .game-target {
+            width: 50px;
+            height: 50px;
+            background-color: var(--button-bg);
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .game-target:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid var(--glow-color);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .preview-container {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .preview-container img {
+            max-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px var(--glow-color);
+            transition: transform 0.3s ease;
+        }
+
+        .preview-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tutorial-step {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .tutorial-step.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fun-fact, .testimonial {
+            background-color: var(--message-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .processing-animation {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .processing-animation::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: processing 1.5s infinite;
+        }
+        
+        @keyframes processing {
+            100% {
+                left: 100%;
+            }
+        }
+        
+        .testimonial-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-item {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .rating-stars {
+            color: gold;
+            font-size: 1.2rem;
+        }
+        
+        .decoded-message-label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        /* New styles for review confirmation */
+        .review-confirmation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            background-color: rgba(0, 200, 0, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            text-align: center;
+            border-left: 4px solid #00cc00;
+        }
+
+        .review-confirmation.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
             h3 { font-size: 1.25rem; }
             .grid-section { grid-template-columns: 1fr; }
-            #drop-area { padding: 8px; }
+            #drop-area { padding: 0.5rem; }
             .motion-button { padding: 0.5rem 1rem; font-size: 0.875rem; }
-            .contributor img { width: 80px; height: 80px; }
-            .modal-content { margin: 10% auto; width: 95%; }
+            .contributor { max-width: 150px; }
+            .contributor img { max-width: 80px; }
+            .stealth-score { font-size: 0.875rem; padding: 0.4rem 0.8rem; }
+            .badge { font-size: 0.75rem; padding: 0.2rem 0.5rem; }
+            .share-challenge { padding: 0.4rem 0.8rem; font-size: 0.875rem; }
+            .game-container { padding: 0.75rem; }
+            .game-target { width: 40px; height: 40px; }
+            .modal-content { margin: 15% auto; padding: 0.75rem; }
         }
 
-        @media (min-width: 641px) and (max-width: 1024px) {
-            h1 { font-size: 3.5rem; }
-            h2 { font-size: 2.25rem; }
-            .grid-section { grid-template-columns: repeat(2, 1fr); }
+        @media (min-width: 481px) and (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-section { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+            .contributor { max-width: 180px; }
+            .contributor img { max-width: 100px; }
+            .stealth-score { font-size: 0.9rem; }
+            .badge { font-size: 0.8rem; }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .grid-section { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+            .contributor { max-width: 200px; }
+        }
+
+        @media (min-width: 1025px) {
+            h1 { font-size: 4rem; }
+            h2 { font-size: 2.5rem; }
+            .contributor { flex: 0 1 25%; }
         }
     </style>
 </head>
@@ -295,101 +682,232 @@
     <div class="background-animation"></div>
 
     <!-- Navigation Bar -->
-    <nav class="w-full flex justify-between items-center mb-6 mt-4 px-4">
-        <div class="flex items-center">
-            <button id="theme-toggle" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-                ☀️ Light Mode
-            </button>
-            <a href="#steganovault" class="text-xl font-bold mx-3 bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
+    <nav class="w-full flex flex-col sm:flex-row justify-between items-center mb-4 mt-2 px-2 sm:px-4">
+        <div class="flex flex-col sm:flex-row items-center gap-2 mb-2 sm:mb-0">
+            <select id="theme-toggle" class="bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-sm sm:text-base w-full sm:w-auto">
+                <option value="dark">🌙 Dark</option>
+                <option value="light">☀️ Light</option>
+                <option value="cyberpunk">💾 Cyberpunk</option>
+                <option value="retro-spy">🕵️ Retro Spy</option>
+                <option value="neon-noir">🌌 Neon Noir</option>
+                <option value="vaporwave">📼 Vaporwave</option>
+                <option value="steampunk">⚙️ Steampunk</option>
+                <option value="hacker-terminal">💻 Hacker Terminal</option>
+                <option value="cosmic-galaxy">🌠 Cosmic Galaxy</option>
+                <option value="minimal-zen">🧘 Minimal Zen</option>
+                <option value="glitchcore">📺 Glitchcore</option>
+            </select>
+            <a href="#steganovault" class="text-lg sm:text-xl font-bold bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors glow-effect w-full sm:w-auto text-center">
                 SteganoVault
             </a>
         </div>
-        <div class="space-x-3">
-            <a href="#encode-decode" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-                Encode/Decode
-            </a>
-            <a href="#how-it-works" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-                How It Works
-            </a>
-            <a href="#contributors" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-                Contributors
-            </a>
-            <a href="https://github.com/hritikranjan1/SteganoVault.git" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-base">
-                GitHub
-            </a>
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
+            <a href="#encode-decode" class="bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-sm sm:text-base glow-effect">Encode/Decode</a>
+            <a href="#how-it-works" class="bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-sm sm:text-base glow-effect">How It Works</a>
+            <a href="#fun-activities" class="bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-sm sm:text-base glow-effect">Fun Activities</a>
+            <a href="#contributors" class="bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-sm sm:text-base glow-effect">Contributors</a>
+            <a href="https://github.com/hritikranjan1/SteganoVault.git" class="bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-sm sm:text-base glow-effect">GitHub</a>
+            <button id="authBtn" class="bg-[var(--button-bg)] text-white px-2 py-1 rounded-lg hover:bg-[var(--hover-bg)] transition-colors text-sm sm:text-base glow-effect">
+                <i class="fas fa-user"></i> <span id="authStatus">Login</span>
+            </button>
         </div>
     </nav>
 
-    <h1 class="text-5xl font-bold mb-8 motion-fade" id="steganovault">🔐 SteganoVault</h1>
-    <p class="text-center mb-8 text-lg">Steganography Tool - Hide and Extract Secret Messages in Files(images, text files, PDFs, DOCX files, audio, and video)</p>
+    <!-- Stealth Score -->
+    <div class="stealth-score-container">
+        <div class="stealth-score">Stealth Score: <span id="stealth-score">0</span></div>
+        <button id="stealthScoreInfoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-lg tooltip">
+            ℹ️
+            <span class="tooltiptext">Track your spy skills with points!</span>
+        </button>
+    </div>
 
-    <!-- Main App Box (Encode/Decode Section) -->
-    <div class="bg-[var(--card-bg)] shadow-lg rounded-lg p-6 w-full max-w-2xl motion-fade mb-12" id="encode-decode">
-        <div class="flex items-center justify-between mb-8">
-            <h2 class="text-4xl font-semibold flex-1 text-center">Encode / Decode</h2>
-            <button id="infoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-xl">ℹ️</button>
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 motion-fade glow-effect text-center" id="steganovault">🔐 SteganoVault</h1>
+    <p class="text-center mb-6 text-sm sm:text-base md:text-lg px-2">Steganography Tool - Hide and Extract Secret Messages in Files (images, text files, PDFs, DOCX files, audio, and video)</p>
+
+    <!-- Tutorial Section -->
+    <div class="w-full max-w-2xl mb-6">
+        <h3 class="text-xl font-semibold mb-2 text-center">Quick Tutorial</h3>
+        <div id="tutorial">
+            <div class="tutorial-step">1. Select a file to encode or decode.</div>
+            <div class="tutorial-step">2. Enter your secret message and optional password.</div>
+            <div class="tutorial-step">3. Click Encode to hide your message or Decode to reveal it.</div>
+        </div>
+        <button id="nextTutorial" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded mt-2 motion-button glow-effect mx-auto block">Next</button>
+    </div>
+
+    <!-- Main App Box -->
+    <div class="bg-[var(--card-bg)] shadow-lg rounded-lg p-4 sm:p-6 w-full max-w-lg sm:max-w-2xl motion-fade mb-8 glow-effect" id="encode-decode">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold flex-1 text-center">Encode / Decode</h2>
+            <button id="infoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-lg sm:text-xl tooltip">
+                ℹ️
+                <span class="tooltiptext">Learn how to share your encoded files!</span>
+            </button>
         </div>
 
         <!-- Drag & Drop File Upload -->
-        <div id="drop-area" class="border-2 border-dashed border-[var(--scrollbar-bg)] rounded-lg p-10 text-center motion-fade">
-            <p class="mb-4 text-xl">📂 Drag & Drop your file here</p>
+        <div id="drop-area" class="text-center motion-fade">
+            <p class="mb-3 text-sm sm:text-lg md:text-xl">📂 Drag & Drop your file here</p>
             <input type="file" id="fileInput" class="hidden" accept=".png,.jpg,.jpeg,.txt,.mp3,.wav,.pdf,.docx,.mp4,.avi,.mov">
-            <button onclick="document.getElementById('fileInput').click()" class="bg-[var(--button-bg)] text-white px-6 py-4 rounded hover:bg-[var(--hover-bg)] transition-colors motion-button text-xl">
+            <button onclick="document.getElementById('fileInput').click()" class="bg-[var(--button-bg)] text-white px-4 py-2 sm:px-6 sm:py-4 rounded hover:bg-[var(--hover-bg)] transition-colors motion-button text-sm sm:text-lg md:text-xl glow-effect w-full sm:w-auto">
                 Select File
             </button>
             <div id="fileName" class="file-name"></div>
         </div>
 
-        <label class="block mt-8 text-xl">Enter Message:</label>
-        <input type="text" id="messageInput" class="w-full p-4 border rounded bg-transparent text-xl" placeholder="Hidden message">
-
-        <label class="block mt-8 text-xl">Optional Password:</label>
-        <input type="password" id="passwordInput" class="w-full p-4 border rounded bg-transparent text-xl" placeholder="Enter password (optional)">
-
-        <div class="flex space-x-4 mt-8">
-            <button onclick="encode()" class="bg-green-500 text-white px-6 py-4 rounded w-full motion-button hover:bg-green-600 text-xl">🔒 Encode</button>
-            <button onclick="decode()" class="bg-red-500 text-white px-6 py-4 rounded w-full motion-button hover:bg-red-600 text-xl">🔓 Decode</button>
+        <!-- Preview Section -->
+        <div class="flex flex-col sm:flex-row gap-4 mt-4">
+            <div id="previewBefore" class="preview-container flex-1 hidden">
+                <p class="text-center font-semibold mb-2">Before:</p>
+                <img class="mx-auto max-h-40">
+            </div>
+            <div id="previewAfter" class="preview-container flex-1 hidden">
+                <p class="text-center font-semibold mb-2">After:</p>
+                <img class="mx-auto max-h-40">
+            </div>
         </div>
 
-        <div id="output" class="mt-8 text-center text-xl"></div>
-        <div id="messageContainer" class="message-container hidden"></div>
+        <label class="block mt-6 text-sm sm:text-lg md:text-xl">Enter Message:</label>
+        <input type="text" id="messageInput" class="w-full p-2 sm:p-4 border rounded bg-transparent text-sm sm:text-lg md:text-xl" placeholder="Hidden message">
+
+        <label class="block mt-6 text-sm sm:text-lg md:text-xl">Optional Password:</label>
+        <input type="password" id="passwordInput" class="w-full p-2 sm:p-4 border rounded bg-transparent text-sm sm:text-lg md:text-xl" placeholder="Enter password (optional)">
+
+        <label class="block mt-6 text-sm sm:text-lg md:text-xl">Custom Watermark (Images Only):</label>
+        <input type="text" id="watermarkInput" class="w-full p-2 sm:p-4 border rounded bg-transparent text-sm sm:text-lg md:text-xl" placeholder="Enter watermark text (optional)">
+
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6">
+            <button id="encodeBtn" class="bg-green-500 text-white px-4 py-2 sm:px-6 sm:py-4 rounded w-full motion-button hover:bg-green-600 text-sm sm:text-lg md:text-xl glow-effect processing-animation hidden">🔒 Encoding...</button>
+            <button id="encodeBtnReady" class="bg-green-500 text-white px-4 py-2 sm:px-6 sm:py-4 rounded w-full motion-button hover:bg-green-600 text-sm sm:text-lg md:text-xl glow-effect">🔒 Encode</button>
+            
+            <button id="decodeBtn" class="bg-red-500 text-white px-4 py-2 sm:px-6 sm:py-4 rounded w-full motion-button hover:bg-red-600 text-sm sm:text-lg md:text-xl glow-effect processing-animation hidden">🔓 Decoding...</button>
+            <button id="decodeBtnReady" class="bg-red-500 text-white px-4 py-2 sm:px-6 sm:py-4 rounded w-full motion-button hover:bg-red-600 text-sm sm:text-lg md:text-xl glow-effect">🔓 Decode</button>
+        </div>
+
+        <div id="output" class="mt-6 text-center text-sm sm:text-lg md:text-xl"></div>
+        <div id="loading" class="spinner hidden"></div>
+        
+        <!-- Decoded Message Container -->
+        <div id="decodedOutputContainer" class="mt-4 hidden">
+            <div class="decoded-message-label">Decoded Message:</div>
+            <div id="decodedOutput" class="decoded-output-container"></div>
+        </div>
+        
+        <div class="badges-container" id="badges"></div>
+        <button id="share-challenge" class="share-challenge hidden">Share Challenge</button>
+        <div class="flex justify-center gap-2 mt-2">
+            <button id="badgesInfoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-lg hidden tooltip">
+                ℹ️
+                <span class="tooltiptext">Earn badges as you gain points!</span>
+            </button>
+            <button id="shareChallengeInfoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-lg hidden tooltip">
+                ℹ️
+                <span class="tooltiptext">Challenge friends to decode your secret!</span>
+            </button>
+        </div>
     </div>
 
-    <!-- Popup Modal -->
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <span class="close">×</span>
-            <h3 class="text-xl font-semibold mb-4">How to Share Your Encoded File</h3>
-            <p class="text-base">
-                Share the downloaded encoded file with your friend via a method that preserves the file as-is, such as:
-            </p>
-            <ul class="list-disc ml-5 mt-2 mb-4">
-                <li><b>Google Drive:</b> Upload the file and share the link.</li>
-                <li><b>Email:</b> Attach the file to an email.</li>
-            </ul>
-            <p class="text-base">
-                <b>Important:</b> Avoid compression-based apps like WhatsApp, as they may alter the file and break the hidden message.
-            </p>
-            <p class="text-base mt-2">
-                If you used a password, share it with your friend separately (e.g., via a secure chat).
-            </p>
+    <!-- User Reviews Section -->
+    <div class="w-full max-w-2xl mb-6">
+        <h3 class="text-xl font-semibold mb-3 text-center">
+            Share Your Experience
+            <button id="reviewInfoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-lg tooltip ml-2">
+                ℹ️
+                <span class="tooltiptext">Please login first to submit your review</span>
+            </button>
+        </h3>
+        
+        <!-- Review Form (hidden by default) -->
+        <div id="reviewForm" class="bg-[var(--card-bg)] p-4 rounded-lg mb-4 glow-effect hidden">
+            <form id="reviewFormElement" class="space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label for="reviewName" class="block text-sm">Name:</label>
+                        <input type="text" id="reviewName" class="w-full p-2 border rounded bg-transparent text-sm" placeholder="Your name" required>
+                    </div>
+                    <div>
+                        <label for="reviewRating" class="block text-sm">Rating:</label>
+                        <select id="reviewRating" class="w-full p-2 border rounded bg-transparent text-sm" required>
+                            <option value="">Select</option>
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="3">★★★</option>
+                            <option value="2">★★</option>
+                            <option value="1">★</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="reviewText" class="block text-sm">Review:</label>
+                    <textarea id="reviewText" class="w-full p-2 border rounded bg-transparent text-sm" rows="3" placeholder="Your feedback..." required></textarea>
+                </div>
+                <button type="submit" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded w-full motion-button glow-effect text-sm">Submit</button>
+            </form>
+            <div id="reviewConfirmation" class="review-confirmation hidden"></div>
         </div>
+        
+        <!-- User Reviews Display -->
+        <div id="userReviewsContainer" class="space-y-4">
+            <!-- Reviews will be loaded here dynamically -->
+            <div class="text-center py-4">
+                <div class="spinner"></div>
+                <p>Loading reviews...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="w-full max-w-2xl mb-6">
+        <div class="flex items-center justify-center gap-2">
+            <h3 class="text-xl font-semibold mb-2 text-center">What Agents Say</h3>
+            
+        </div>
+        <div class="testimonial-carousel-container relative overflow-hidden h-40">
+            <div class="testimonial-carousel" id="dynamicTestimonials">
+                <!-- Testimonials will be loaded here dynamically -->
+                <div class="testimonial-item p-4">
+                    <div class="testimonial bg-[var(--card-bg)] p-4 rounded-lg glow-effect">
+                        <div class="rating-stars mb-2">★★★★★</div>
+                        <p class="italic">"SteganoVault made hiding messages so fun and easy!"</p>
+                        <p class="text-right font-semibold mt-2">- Agent X</p>
+                    </div>
+                </div>
+                <div class="testimonial-item p-4">
+                    <div class="testimonial bg-[var(--card-bg)] p-4 rounded-lg glow-effect">
+                        <div class="rating-stars mb-2">★★★★★</div>
+                        <p class="italic">"A must-have tool for any spy enthusiast!"</p>
+                        <p class="text-right font-semibold mt-2">- Codebreaker Y</p>
+                    </div>
+                </div>
+                <div class="testimonial-item p-4">
+                    <div class="testimonial bg-[var(--card-bg)] p-4 rounded-lg glow-effect">
+                        <div class="rating-stars mb-2">★★★★</div>
+                        <p class="italic">"The perfect balance of security and usability."</p>
+                        <p class="text-right font-semibold mt-2">- Security Expert Z</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Assurance -->
+    <div class="w-full max-w-2xl mb-6 text-center">
+        <p class="text-sm sm:text-base bg-[var(--card-bg)] p-4 rounded glow-effect">
+            🔒 <strong>Privacy Assurance:</strong> 
+            <span id="privacyText">We don't store your files or messages—everything is processed in real-time and deleted after use.</span>
+            <button id="learnMorePrivacy" class="text-blue-400 hover:text-blue-300 ml-1">Learn more</button>
+        </p>
     </div>
 
     <!-- How It Works Section -->
-    <h3 class="text-3xl font-semibold mb-6 motion-fade" id="how-it-works">How It Works</h3>
+    <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 motion-fade glow-effect text-center" id="how-it-works">How It Works</h3>
     <div class="grid-section" id="how-it-works">
-        <div class="grid-card motion-fade">
+        <div class="grid-card motion-fade glow-effect">
             <h3>What is Steganography?</h3>
-            <p>
-                Steganography is the art and science of hiding secret information inside a non-suspicious file, message, or medium. It ensures that the hidden data remains undetectable to anyone who is not aware of its presence.
-            </p>
-
+            <p>Steganography is the art and science of hiding secret information inside a non-suspicious file, message, or medium. It ensures that the hidden data remains undetectable to anyone who is not aware of its presence.</p>
             <h3>🔹 How It Works?</h3>
-            <p>
-                Unlike encryption, which scrambles a message to make it unreadable, steganography hides the message **within another file** (such as an image, audio, video, or text file) so that no one suspects its existence.
-            </p>
-
+            <p>Unlike encryption, which scrambles a message to make it unreadable, steganography hides the message <strong>within another file</strong> (such as an image, audio, video, or text file) so that no one suspects its existence.</p>
             <h3>🔹 Common Techniques</h3>
             <ul>
                 <li><b>LSB (Least Significant Bit) Steganography:</b> Hides data in the least significant bits of an image or audio file.</li>
@@ -398,261 +916,1173 @@
                 <li><b>Text Steganography:</b> Uses invisible characters (spaces, Unicode characters) to hide information in text.</li>
                 <li><b>Video Steganography:</b> Stores secret data in video frames.</li>
             </ul>
-
-            <h3>🔹 Applications of Steganography</h3>
+            <h3>🔹 Applications</h3>
             <ul>
                 <li>🔐 <b>Secure Communication:</b> Hiding confidential messages in media files.</li>
                 <li>🕵️ <b>Cybersecurity:</b> Protecting sensitive data from hackers.</li>
                 <li>🎨 <b>Watermarking:</b> Embedding copyright information in images or videos.</li>
                 <li>📡 <b>Covert Operations:</b> Used in military and intelligence communication.</li>
             </ul>
-
-            <p>
-                Steganography is widely used in <b>cybersecurity, digital forensics, and secure communications</b>, ensuring privacy and confidentiality.
-            </p>
         </div>
-
-        <div class="grid-card motion-fade">
-            <h3>🛠️ Technical Process of SteganoVault</h3>
-            <p>
-                Steganography works by embedding the secret message into the carrier file (e.g., image, audio, video) using techniques like LSB (Least Significant Bit) for images or frequency domain manipulation for audio.
-            </p>
-
-            <h3>🔹 Step 1: Input Selection</h3>
-            <p>
-                The user selects a <b>carrier file</b> (image, audio, video, or text) and enters the <b>secret data</b> to be hidden.
-            </p>
-
-            <h3>🔹 Step 2: Data Preprocessing</h3>
-            <p>
-                <b>Encryption (Optional):</b> The secret data can be encrypted (e.g., AES) for extra security.
-            </p>
-            <p>
-                <b>Data Conversion:</b> Convert the secret message into binary format for embedding.
-            </p>
-
-            <h3>🔹 Step 3: Data Embedding (Steganography)</h3>
+        <div class="grid-card motion-fade glow-effect">
+            <h3>🛠️ Technical Process</h3>
+            <p>Steganography works by embedding the secret message into the carrier file (e.g., image, audio, video) using techniques like LSB for images or frequency domain manipulation for audio.</p>
+            <h3>🔹 Steps</h3>
             <ul>
-                <li><b>Images (LSB Steganography):</b> Modify the <b>Least Significant Bit (LSB)</b> of pixel values.</li>
-                <li><b>Audio (LSB or Frequency Modulation):</b> Hide data in digital wave samples.</li>
-                <li><b>Video:</b> Embed data in specific frames using LSB or motion-based techniques.</li>
-                <li><b>Text:</b> Hide information using <b>whitespace or Unicode encoding</b>.</li>
+                <li><b>Input Selection:</b> Choose a carrier file and secret data.</li>
+                <li><b>Data Preprocessing:</b> Optionally encrypt the data and convert it to binary.</li>
+                <li><b>Data Embedding:</b> Hide the message using LSB, Unicode, or metadata.</li>
+                <li><b>Data Extraction:</b> Retrieve the message with the correct method.</li>
+                <li><b>Verification:</b> Use checksums to ensure integrity.</li>
             </ul>
-
-            <h3>🔹 Step 4: Data Extraction</h3>
-            <p>
-                The hidden message is retrieved using a <b>decryption key</b> and extraction algorithm.
-            </p>
-
-            <h3>🔹 Step 5: Security & Verification</h3>
-            <p>
-                The extracted message is verified using cryptographic <b>checksums or hashes</b> to ensure integrity.
-            </p>
         </div>
-
-        <div class="grid-card motion-fade">
-            <h3 style="margin-bottom: 20px;">🔒 Best Practices for SteganoVault</h3>
+        <div class="grid-card motion-fade glow-effect">
+            <h3>🔒 Best Practices</h3>
             <ul>
-                <li>🔑 <b>Use Strong Passwords:</b> Protect hidden data with strong encryption and complex passwords.</li>
-                <li>🖼️ <b>Select High-Quality Carrier Files:</b> Use images, audio, or videos with high resolution and complexity to avoid detection.</li>
-                <li>🔐 <b>Combine with Encryption:</b> Encrypt the hidden message before embedding it for extra security.</li>
-                <li>⚡ <b>Avoid Common Patterns:</b> Do not use repetitive or predictable hiding techniques that can be detected by steganalysis.</li>
-                <li>🛠️ <b>Test and Verify:</b> Ensure that the embedded message remains hidden and intact after transmission or compression.</li>
+                <li>Use strong passwords for added security.</li>
+                <li>Choose high-quality carrier files.</li>
+                <li>Avoid predictable patterns.</li>
+                <li>Test the file after encoding.</li>
             </ul>
-
-            <h3 style="margin-top: 20px;">⚠️ Limitations of SteganoVault</h3>
+            <h3>⚠️ Limitations</h3>
             <ul>
-                <li>📏 <b>Limited Data Capacity:</b> The amount of data that can be hidden depends on the size and complexity of the carrier file.</li>
-                <li>🕵️ <b>Vulnerability to Steganalysis:</b> Advanced detection techniques can identify hidden messages in manipulated files.</li>
-                <li>📂 <b>Carrier File Sensitivity:</b> Compression, resizing, or format conversion can damage the hidden data, leading to loss.</li>
-                <li>🚀 <b>Processing Time:</b> Large data embedding may slow down processing speed and impact efficiency.</li>
+                <li>Limited data capacity based on file size.</li>
+                <li>Vulnerable to steganalysis.</li>
+                <li>Sensitive to compression or resizing.</li>
+                <li>Processing time increases with large data.</li>
             </ul>
+        </div>
+    </div>
+
+    <!-- Fun Activities Section -->
+    <div class="flex items-center justify-center gap-2">
+        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 motion-fade glow-effect text-center" id="fun-activities">Fun Activities</h3>
+        <button id="funActivitiesInfoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-lg tooltip">
+            ℹ️
+            <span class="tooltiptext">Play games to boost your score!</span>
+        </button>
+    </div>
+    <div class="grid-section">
+        <div class="grid-card motion-fade glow-effect game-container">
+            <h3>🎯 Spy Target Practice</h3>
+            <p>Click the target as many times as you can in 10 seconds!</p>
+            <div id="game-target" class="game-target mx-auto mt-4"></div>
+            <p class="mt-4">Score: <span id="game-score">0</span></p>
+            <button id="start-game" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded mt-4 motion-button glow-effect">Start Game</button>
         </div>
     </div>
 
     <!-- Contributors Section -->
-    <h3 class="text-3xl font-semibold mb-6 motion-fade" id="contributors">Contributors</h3>
+    <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 motion-fade glow-effect text-center" id="contributors">Contributors</h3>
     <div class="contributors motion-fade show">
         <div class="contributor">
-            <img src="https://github.com/hritikranjan1/Imagehosting/blob/main/Hritik-removebg-preview.png?raw=true" alt="Hritik Ranjan" class="mx-auto rounded-full w-32 h-32 shadow-lg">
-            <p class="font-semibold mt-2 text-xl">Hritik Ranjan</p>
+            <img src="https://github.com/hritikranjan1/Imagehosting/blob/main/Hritik-removebg-preview.png?raw=true" alt="Hritik Ranjan" class="mx-auto rounded-full shadow-lg">
+            <p class="font-semibold mt-2 text-lg sm:text-xl">Hritik Ranjan</p>
             <div class="flex flex-col items-center space-y-2 mt-2">
-                <a href="https://github.com/hritikranjan1" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors">GitHub</a>
-                <a href="https://www.linkedin.com/in/hritikranjan1/" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors">LinkedIn</a>
-                <a href="https://t.me/codewithluv143" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors">Telegram</a>
-            </div>
-        </div>
-        <div class="contributor flex flex-col items-center space-y-2">
-            <img src="https://github.com/hritikranjan1/Imagehosting/blob/main/ruhul.jpeg?raw=true" alt="Ruhul Islam" class="w-32 h-32 rounded-full shadow-lg">
-            <p class="font-semibold text-xl">Ruhul Islam</p>
-            <div class="flex flex-col items-center space-y-2">
-                <a href="https://github.com/iruhul8750" class="text-blue-500 hover:text-blue-600 transition-colors">GitHub</a>
-                <a href="https://www.linkedin.com/in/ruhulislam2022/" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors">LinkedIn</a>
+                <a href="https://github.com/hritikranjan1" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors text-sm sm:text-base">GitHub</a>
+                <a href="https://www.linkedin.com/in/hritikranjan1/" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors text-sm sm:text-base">LinkedIn</a>
+                <a href="https://t.me/codewithluv143" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors text-sm sm:text-base">Telegram</a>
             </div>
         </div>
         <div class="contributor">
-            <img src="https://github.com/hritikranjan1/Imagehosting/blob/main/kamal.png?raw=true" alt="Kamaljit Chauhan">
-            <p class="font-semibold text-xl">Kamaljit Chauhan</p>
-            <a href="https://github.com/Kamaljit8708885373" class="text-blue-500 hover:text-blue-600 transition-colors">GitHub</a>
+            <img src="https://github.com/hritikranjan1/Imagehosting/blob/main/ruhul.jpeg?raw=true" alt="Ruhul Islam" class="mx-auto rounded-full shadow-lg">
+            <p class="font-semibold mt-2 text-lg sm:text-xl">Ruhul Islam</p>
+            <div class="flex flex-col items-center space-y-2 mt-2">
+                <a href="https://github.com/iruhul8750" class="text-blue-500 hover:text-blue-600 transition-colors text-sm sm:text-base">GitHub</a>
+                <a href="https://www.linkedin.com/in/ruhulislam2022/" target="_blank" class="text-blue-500 hover:text-blue-600 transition-colors text-sm sm:text-base">LinkedIn</a>
+            </div>
+        </div>
+        <div class="contributor">
+            <img src="https://github.com/hritikranjan1/Imagehosting/blob/main/kamal.png?raw=true" alt="Kamaljit Chauhan" class="mx-auto rounded-full shadow-lg">
+            <p class="font-semibold mt-2 text-lg sm:text-xl">Kamaljit Chauhan</p>
+            <a href="https://github.com/Kamaljit8708885373" class="text-blue-500 hover:text-blue-600 transition-colors text-sm sm:text-base">GitHub</a>
+        </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="w-full max-w-md mb-8 mt-8">
+        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 motion-fade glow-effect text-center">Contact Us</h3>
+        <div class="bg-[var(--card-bg)] shadow-lg rounded-lg p-3 motion-fade glow-effect">
+            <form id="contactForm" class="space-y-2">
+                <div>
+                    <label for="name" class="block text-sm">Name:</label>
+                    <input type="text" id="name" name="name" class="w-full p-1 border rounded bg-transparent text-sm" placeholder="Your Name" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm">Email:</label>
+                    <input type="email" id="email" name="email" class="w-full p-1 border rounded bg-transparent text-sm" placeholder="Your Email" required>
+                </div>
+                <div>
+                    <label for="message" class="block text-sm">Message:</label>
+                    <textarea id="message" name="message" class="w-full p-1 border rounded bg-transparent text-sm" rows="2" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" id="sendMessageBtn" class="bg-[var(--button-bg)] text-white px-3 py-1 rounded w-full motion-button glow-effect text-sm">Send Message</button>
+            </form>
+            <div id="confirmationMessage" class="text-center mt-2 text-green-500 confirmation-message hidden text-sm">✅ Message sent successfully! We'll get back to you soon.</div>
         </div>
     </div>
 
     <!-- Footer Section -->
-    <div class="footer">
+    <div class="footer glow-effect">
         <div class="important-note">
-            <h3 class="text-xl font-semibold">Important Note</h3>
-            <p class="text-base">
-                This tool is intended for educational and entertainment purposes only. It is not a secure encryption method and should not be used for sensitive or confidential information. For secure communication, consider using proper encryption tools.
-            </p>
+            <h3 class="text-lg sm:text-xl font-semibold">Important Note</h3>
+            <p class="text-sm sm:text-base">This tool is intended for educational and entertainment purposes only. It is not a secure encryption method and should not be used for sensitive or confidential information. For secure communication, consider using proper encryption tools.</p>
         </div>
-        <p class="text-lg mt-4">© 2025 SteganoVault. Some rights reserved. Built with ❤️</p>
+        <p class="text-sm sm:text-lg mt-4">© 2025 SteganoVault. Some rights reserved. Built with ❤️</p>
+    </div>
+
+    <!-- Popup Modals -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3 class="text-lg sm:text-xl font-semibold mb-4">How to Share Your Encoded File</h3>
+            <p class="text-sm sm:text-base">Share the downloaded encoded file with your friend via a method that preserves the file as-is, such as:</p>
+            <ul class="list-disc ml-5 mt-2 mb-4 text-sm sm:text-base">
+                <li><b>Google Drive:</b> Upload the file and share the link.</li>
+                <li><b>Email:</b> Attach the file to an email.</li>
+            </ul>
+            <p class="text-sm sm:text-base"><b>Important:</b> Avoid compression-based apps like WhatsApp, as they may alter the file and break the hidden message.</p>
+            <p class="text-sm sm:text-base mt-2">If you used a password, share it with your friend separately (e.g., via a secure chat).</p>
+        </div>
+    </div>
+
+    <div id="stealthScoreModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3 class="text-lg sm:text-xl font-semibold mb-4">Stealth Score</h3>
+            <p class="text-sm sm:text-base"><b>What is it?</b> The Stealth Score is a fun way to track your progress as a secret agent using SteganoVault. It increases as you encode, decode, or play games.</p>
+            <p class="text-sm sm:text-base mt-2"><b>How it works:</b></p>
+            <ul class="list-disc ml-5 mt-2 mb-4 text-sm sm:text-base">
+                <li>Encoding a file: +10 points</li>
+                <li>Decoding a file: +15 points</li>
+                <li>Clicking the target in Spy Target Practice: +5 points per click</li>
+            </ul>
+            <p class="text-sm sm:text-base"><b>Details:</b> Your score reflects your skill level. Higher scores unlock badges like Rookie Spy, Codebreaker, and Shadow Agent!</p>
+        </div>
+    </div>
+
+    <div id="badgesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3 class="text-lg sm:text-xl font-semibold mb-4">Rookie Spy & Codebreaker Badges</h3>
+            <p class="text-sm sm:text-base"><b>What are they?</b> Badges are achievements you earn based on your Stealth Score, showing off your steganography prowess.</p>
+            <p class="text-sm sm:text-base mt-2"><b>How they work:</b></p>
+            <ul class="list-disc ml-5 mt-2 mb-4 text-sm sm:text-base">
+                <li><b>Rookie Spy:</b> Earned at 10 points. You're just starting your spy journey!</li>
+                <li><b>Codebreaker:</b> Earned at 50 points. You've cracked some tough secrets!</li>
+                <li><b>Shadow Agent:</b> Earned at 100 points. You're a master of stealth!</li>
+            </ul>
+            <p class="text-sm sm:text-base"><b>Details:</b> Badges appear below the encode/decode section as you reach milestones. Collect them all to become a legendary agent!</p>
+        </div>
+    </div>
+
+    <div id="shareChallengeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3 class="text-lg sm:text-xl font-semibold mb-4">Share Challenge</h3>
+            <p class="text-sm sm:text-base"><b>What is it?</b> Share Challenge lets you send your encoded file to friends, challenging them to decode your secret message.</p>
+            <p class="text-sm sm:text-base mt-2"><b>How it works:</b></p>
+            <ul class="list-disc ml-5 mt-2 mb-4 text-sm sm:text-base">
+                <li>After encoding, click "Share Challenge" to generate a shareable link or text.</li>
+                <li>On supported devices, it uses the native share feature; otherwise, it provides a text prompt to copy.</li>
+                <li>Your friend downloads the file and uses SteganoVault to decode it.</li>
+            </ul>
+            <p class="text-sm sm:text-base"><b>Details:</b> Make sure to share the password separately if you used one. Avoid platforms that compress files (e.g., WhatsApp) to keep the message intact.</p>
+        </div>
+    </div>
+
+    <div id="funActivitiesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3 class="text-lg sm:text-xl font-semibold mb-4">Fun Activities</h3>
+            <p class="text-sm sm:text-base"><b>What is it?</b> Fun Activities include interactive games to enhance your SteganoVault experience, like Spy Target Practice.</p>
+            <p class="text-sm sm:text-base mt-2"><b>How it works:</b></p>
+            <ul class="list-disc ml-5 mt-2 mb-4 text-sm sm:text-base">
+                <li><b>Spy Target Practice:</b> Click the moving target as many times as possible in 10 seconds.</li>
+                <li>Each click earns 5 Stealth Score points.</li>
+                <li>The game resets after 10 seconds, showing your final score.</li>
+            </ul>
+            <p class="text-sm sm:text-base"><b>Details:</b> It's a playful way to test your reflexes and boost your score. More activities may be added in the future!</p>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <div id="authModalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div id="resetPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <div id="resetPasswordContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
     </div>
 
     <script>
-        // Dark Mode Toggle
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            let html = document.documentElement;
-            if (html.getAttribute('data-theme') === 'dark') {
-                html.setAttribute('data-theme', 'light');
-                this.innerHTML = "🌙 Dark Mode";
+        // Wait for DOM and EmailJS SDK to load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize EmailJS with your Public Key
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init("jocUFhKyehMFmQgYW"); // Your EmailJS Public Key
+                console.log("EmailJS initialized successfully with Public Key: jocUFhKyehMFmQgYW");
             } else {
-                html.setAttribute('data-theme', 'dark');
-                this.innerHTML = "☀️ Light Mode";
+                console.error("EmailJS SDK failed to load. Check network or CDN URL.");
             }
-        });
 
-        // Drag & Drop Feature
-        const dropArea = document.getElementById("drop-area");
-        const fileInput = document.getElementById("fileInput");
-        const fileNameDisplay = document.getElementById("fileName");
-
-        ['dragenter', 'dragover'].forEach(event => {
-            dropArea.addEventListener(event, (e) => {
-                e.preventDefault();
-                dropArea.classList.add('dragover');
+            // Theme Switcher
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('change', function() {
+                document.documentElement.setAttribute('data-theme', this.value);
             });
-        });
 
-        ['dragleave', 'drop'].forEach(event => {
-            dropArea.addEventListener(event, (e) => {
-                e.preventDefault();
-                dropArea.classList.remove('dragover');
+            // Drag & Drop Feature
+            const dropArea = document.getElementById("drop-area");
+            const fileInput = document.getElementById("fileInput");
+            const fileNameDisplay = document.getElementById("fileName");
+            const previewBefore = document.getElementById("previewBefore");
+            const previewBeforeImg = previewBefore.querySelector('img');
+            const previewAfter = document.getElementById("previewAfter");
+            const previewAfterImg = previewAfter.querySelector('img');
+
+            ['dragenter', 'dragover'].forEach(event => {
+                dropArea.addEventListener(event, (e) => {
+                    e.preventDefault();
+                    dropArea.classList.add('dragover');
+                });
             });
-        });
 
-        dropArea.addEventListener('drop', (e) => {
-            const files = e.dataTransfer.files;
-            if (files.length) {
-                fileInput.files = files;
-                fileNameDisplay.textContent = files[0].name;
+            ['dragleave', 'drop'].forEach(event => {
+                dropArea.addEventListener(event, (e) => {
+                    e.preventDefault();
+                    dropArea.classList.remove('dragover');
+                });
+            });
+
+            dropArea.addEventListener('drop', (e) => {
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    handleFile(fileInput.files[0]);
+                }
+            });
+
+            function handleFile(file) {
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                fileInput.files = dt.files;
+                fileNameDisplay.textContent = file.name;
+                
+                // Show preview for images
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        previewBeforeImg.src = reader.result;
+                        previewBefore.classList.remove('hidden');
+                        previewAfter.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    previewBefore.classList.add('hidden');
+                    previewAfter.classList.add('hidden');
+                }
             }
-        });
 
-        fileInput.addEventListener('change', () => {
-            if (fileInput.files.length) {
-                fileNameDisplay.textContent = fileInput.files[0].name;
+            // Stealth Score & Badges
+            let stealthScore = 0;
+            const badges = ['Rookie Spy', 'Codebreaker', 'Shadow Agent'];
+            const stealthScoreDisplay = document.getElementById('stealth-score');
+            const badgesContainer = document.getElementById('badges');
+            const badgesInfoBtn = document.getElementById('badgesInfoBtn');
+
+            function updateStealthScore(points) {
+                stealthScore += points;
+                stealthScoreDisplay.textContent = stealthScore;
+                if (stealthScore >= 10 && !badgesContainer.innerHTML.includes('Rookie Spy')) {
+                    badgesContainer.innerHTML += '<span class="badge">Rookie Spy</span>';
+                    badgesInfoBtn.classList.remove('hidden');
+                }
+                if (stealthScore >= 50 && !badgesContainer.innerHTML.includes('Codebreaker')) {
+                    badgesContainer.innerHTML += '<span class="badge">Codebreaker</span>';
+                }
+                if (stealthScore >= 100 && !badgesContainer.innerHTML.includes('Shadow Agent')) {
+                    badgesContainer.innerHTML += '<span class="badge">Shadow Agent</span>';
+                }
             }
-        });
 
-        // Encode Function
-        function encode() {
-            const file = fileInput.files[0];
-            const message = document.getElementById("messageInput").value;
-            const password = document.getElementById("passwordInput").value;
-            const output = document.getElementById("output");
+            // Enhanced encode function
+            async function encodeFile() {
+                const file = fileInput.files[0];
+                const message = document.getElementById("messageInput").value;
+                const password = document.getElementById("passwordInput").value;
+                const watermark = document.getElementById("watermarkInput").value;
+                const output = document.getElementById("output");
+                const shareButton = document.getElementById("share-challenge");
+                const shareInfoBtn = document.getElementById("shareChallengeInfoBtn");
+                const loading = document.getElementById("loading");
+                const encodeBtnReady = document.getElementById("encodeBtnReady");
+                const encodeBtnProcessing = document.getElementById("encodeBtn");
+                const decodedOutputContainer = document.getElementById("decodedOutputContainer");
 
-            if (!file || !message) {
-                alert("Please select a file and enter a message!");
-                return;
-            }
+                if (!file || !message) {
+                    output.innerHTML = "<p class='text-red-500'>⚠️ Missing file or message, Agent!</p>";
+                    return;
+                }
 
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("message", message);
-            formData.append("password", password);
+                output.innerHTML = "";
+                decodedOutputContainer.classList.add('hidden');
+                encodeBtnReady.classList.add('hidden');
+                encodeBtnProcessing.classList.remove('hidden');
+                loading.classList.remove('hidden');
+                
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("message", message);
+                formData.append("password", password);
+                formData.append("watermark", watermark);
 
-            output.innerHTML = "<p class='text-yellow-500'>⏳ Encoding...</p>";
-            fetch("/encode", { method: "POST", body: formData })
-                .then(response => response.blob())
-                .then(blob => {
+                try {
+                    const response = await fetch("/encode", {
+                        method: "POST",
+                        body: formData
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || "Encoding failed");
+                    }
+
+                    const responseData = JSON.parse(response.headers.get("X-Response-Data"));
+                    
+                    // Show before/after previews
+                    if (file.type.startsWith('image/')) {
+                        if (responseData.preview_url) {
+                            previewAfterImg.src = responseData.preview_url;
+                            previewAfter.classList.remove('hidden');
+                        }
+                    }
+                    
+                    // Download the file
+                    const blob = await response.blob();
                     const url = window.URL.createObjectURL(blob);
                     const a = document.createElement("a");
                     a.href = url;
-                    a.download = "encoded_" + file.name;
+                    a.download = responseData.filename;
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
-                    output.innerHTML = "<p class='text-green-500'>✅ File encoded successfully! Downloading...</p>";
-                    document.getElementById("messageContainer").classList.add("hidden");
-                    resetForm();
-                })
-                .catch(error => {
-                    output.innerHTML = "<p class='text-red-500'>❌ Error encoding file.</p>";
-                });
-        }
-
-        // Decode Function
-        function decode() {
-            const file = fileInput.files[0];
-            const password = document.getElementById("passwordInput").value;
-            const output = document.getElementById("output");
-            const messageContainer = document.getElementById("messageContainer");
-
-            if (!file) {
-                alert("Please select a file to decode!");
-                return;
+                    
+                    output.innerHTML = `
+                        <p class='text-green-500'>✅ Mission complete—secret secured!</p>
+                        <p class='text-sm mt-2'>Processing time: ${responseData.processing_time}s</p>
+                    `;
+                    
+                    updateStealthScore(10);
+                    shareButton.classList.remove('hidden');
+                    shareInfoBtn.classList.remove('hidden');
+                    shareButton.onclick = () => shareChallenge(responseData.share_url);
+                } catch (error) {
+                    console.error("Encoding error:", error);
+                    output.innerHTML = `<p class='text-red-500'>❌ Signal lost—${error.message}</p>`;
+                } finally {
+                    encodeBtnReady.classList.remove('hidden');
+                    encodeBtnProcessing.classList.add('hidden');
+                    loading.classList.add('hidden');
+                }
             }
 
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("password", password);
+            // Enhanced decode function
+            async function decodeFile() {
+                const file = fileInput.files[0];
+                const password = document.getElementById("passwordInput").value;
+                const output = document.getElementById("output");
+                const decodedOutputContainer = document.getElementById("decodedOutputContainer");
+                const decodedOutput = document.getElementById("decodedOutput");
+                const loading = document.getElementById("loading");
+                const decodeBtnReady = document.getElementById("decodeBtnReady");
+                const decodeBtnProcessing = document.getElementById("decodeBtn");
 
-            output.innerHTML = "<p class='text-yellow-500'>⏳ Decoding...</p>";
-            fetch("/decode", { method: "POST", body: formData })
+                if (!file) {
+                    output.innerHTML = "<p class='text-red-500'>⚠️ No file detected, Agent!</p>";
+                    return;
+                }
+
+                output.innerHTML = "";
+                decodedOutputContainer.classList.add('hidden');
+                decodeBtnReady.classList.add('hidden');
+                decodeBtnProcessing.classList.remove('hidden');
+                loading.classList.remove('hidden');
+                
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("password", password);
+
+                try {
+                    const response = await fetch("/decode", {
+                        method: "POST",
+                        body: formData
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(data.error || "Decoding failed");
+                    }
+
+                    // Show before/after previews if available
+                    if (file.type.startsWith('image/')) {
+                        if (data.preview_url) {
+                            previewAfterImg.src = data.preview_url;
+                            previewAfter.classList.remove('hidden');
+                        }
+                    }
+                    
+                    output.innerHTML = `
+                        <p class='text-blue-500'>🔓 Intel retrieved successfully!</p>
+                        <p class='text-sm mt-2'>Processing time: ${data.processing_time}s</p>
+                    `;
+                    
+                    decodedOutput.textContent = data.message;
+                    decodedOutputContainer.classList.remove('hidden');
+                    updateStealthScore(15);
+                } catch (error) {
+                    console.error("Decoding error:", error);
+                    output.innerHTML = `<p class='text-red-500'>❌ Decryption failed—${error.message}</p>`;
+                } finally {
+                    decodeBtnReady.classList.remove('hidden');
+                    decodeBtnProcessing.classList.add('hidden');
+                    loading.classList.add('hidden');
+                }
+            }
+
+            // Updated Share Challenge function to prevent duplication
+            function shareChallenge(shareUrl) {
+                const shareText = `I've hidden a secret with SteganoVault—can you crack it? Get the file here: ${shareUrl} and decode it at: https://steganovault.onrender.com/`;
+                
+                if (navigator.share && navigator.canShare) {
+                    navigator.share({
+                        text: shareText
+                    }).then(() => {
+                        console.log('Challenge shared successfully!');
+                    }).catch((error) => {
+                        console.error('Error sharing:', error);
+                        fallbackShare(shareText);
+                    });
+                } else {
+                    fallbackShare(shareText);
+                }
+            }
+
+            function fallbackShare(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Challenge text copied to clipboard! Paste it to share with your friends.');
+            }
+
+            // Testimonial carousel
+            let currentTestimonial = 0;
+            const testimonials = document.querySelectorAll('.testimonial-item');
+            const carousel = document.querySelector('.testimonial-carousel');
+            
+            function showTestimonial(index) {
+                carousel.style.transform = `translateX(-${index * 100}%)`;
+            }
+            
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+
+            // Privacy assurance
+            document.getElementById('learnMorePrivacy').addEventListener('click', async () => {
+                const response = await fetch('/privacy');
+                const data = await response.json();
+                document.getElementById('privacyText').textContent = data.privacy_policy;
+            });
+
+            // Event listeners
+            document.getElementById('encodeBtnReady').addEventListener('click', encodeFile);
+            document.getElementById('decodeBtnReady').addEventListener('click', decodeFile);
+            
+            // Tutorial Animation
+            const tutorialSteps = document.querySelectorAll('.tutorial-step');
+            let currentStep = 0;
+            tutorialSteps[currentStep].classList.add('active');
+            document.getElementById('nextTutorial').addEventListener('click', () => {
+                tutorialSteps[currentStep].classList.remove('active');
+                currentStep = (currentStep + 1) % tutorialSteps.length;
+                tutorialSteps[currentStep].classList.add('active');
+            });
+
+            // Modal Functionality
+            const modals = {
+                info: document.getElementById('infoModal'),
+                stealthScore: document.getElementById('stealthScoreModal'),
+                badges: document.getElementById('badgesModal'),
+                shareChallenge: document.getElementById('shareChallengeModal'),
+                funActivities: document.getElementById('funActivitiesModal'),
+                auth: document.getElementById('authModal'),
+                resetPassword: document.getElementById('resetPasswordModal')
+            };
+
+            const buttons = {
+                info: document.getElementById('infoBtn'),
+                stealthScore: document.getElementById('stealthScoreInfoBtn'),
+                badges: document.getElementById('badgesInfoBtn'),
+                shareChallenge: document.getElementById('shareChallengeInfoBtn'),
+                funActivities: document.getElementById('funActivitiesInfoBtn'),
+                auth: document.getElementById('authBtn')
+            };
+
+            Object.keys(buttons).forEach(key => {
+                if (buttons[key]) {
+                    buttons[key].addEventListener('click', () => {
+                        modals[key].style.display = 'block';
+                    });
+                }
+            });
+
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', () => {
+                    Object.values(modals).forEach(modal => modal.style.display = 'none');
+                });
+            });
+
+            window.addEventListener('click', (e) => {
+                Object.values(modals).forEach(modal => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+
+            // Fun Activity: Spy Target Practice
+            const startGameBtn = document.getElementById('start-game');
+            const gameTarget = document.getElementById('game-target');
+            const gameScoreDisplay = document.getElementById('game-score');
+            let gameScore = 0;
+            let gameActive = false;
+
+            startGameBtn.addEventListener('click', () => {
+                if (!gameActive) {
+                    gameActive = true;
+                    gameScore = 0;
+                    gameScoreDisplay.textContent = gameScore;
+                    startGameBtn.textContent = 'Game On!';
+                    startGameBtn.disabled = true;
+
+                    const gameDuration = 10000;
+                    moveTarget();
+
+                    gameTarget.addEventListener('click', () => {
+                        if (gameActive) {
+                            gameScore++;
+                            gameScoreDisplay.textContent = gameScore;
+                            moveTarget();
+                            updateStealthScore(5);
+                        }
+                    });
+
+                    setTimeout(() => {
+                        gameActive = false;
+                        startGameBtn.textContent = 'Start Game';
+                        startGameBtn.disabled = false;
+                        gameTarget.style.left = '50%';
+                        gameTarget.style.top = '50%';
+                        alert(`Game Over! Your score: ${gameScore}`);
+                    }, gameDuration);
+                }
+            });
+
+            function moveTarget() {
+                const container = document.querySelector('.game-container');
+                const maxX = container.clientWidth - gameTarget.clientWidth;
+                const maxY = container.clientHeight - gameTarget.clientHeight - 60;
+                const newX = Math.floor(Math.random() * maxX);
+                const newY = Math.floor(Math.random() * maxY);
+                gameTarget.style.left = `${newX}px`;
+                gameTarget.style.top = `${newY}px`;
+            }
+
+            // Contributors Animation
+            document.querySelector('.contributors').classList.add('show');
+
+            // Contact Form Submission with EmailJS
+            const contactForm = document.getElementById('contactForm');
+            const sendMessageBtn = document.getElementById('sendMessageBtn');
+            const confirmationMessage = document.getElementById('confirmationMessage');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Add sending animation and disable button
+                sendMessageBtn.classList.add('sending');
+                sendMessageBtn.textContent = 'Sending...';
+                sendMessageBtn.disabled = true;
+
+                const templateParams = {
+                    from_name: document.getElementById('name').value,
+                    from_email: document.getElementById('email').value,
+                    message: document.getElementById('message').value
+                };
+
+                console.log("Sending email with params:", templateParams);
+
+                emailjs.send('service_jkj2tfh', 'template_62s2pkv', templateParams)
+                    .then(function(response) {
+                        console.log('Email sent successfully!', response.status, response.text);
+                        sendMessageBtn.classList.remove('sending');
+                        sendMessageBtn.textContent = 'Send Message';
+                        sendMessageBtn.disabled = false;
+                        confirmationMessage.classList.remove('hidden');
+                        confirmationMessage.classList.add('show');
+                        contactForm.reset();
+
+                        setTimeout(() => {
+                            confirmationMessage.classList.remove('show');
+                            confirmationMessage.classList.add('hidden');
+                        }, 5000);
+                    }, function(error) {
+                        console.error('Failed to send email:', error);
+                        sendMessageBtn.classList.remove('sending');
+                        sendMessageBtn.textContent = 'Send Message';
+                        sendMessageBtn.disabled = false;
+                        alert('Failed to send message: ' + (error.text || 'Unknown error') + '. Check console for details.');
+                    });
+            });
+
+            // User Reviews Functionality
+            async function loadUserReviews() {
+                const container = document.getElementById('userReviewsContainer');
+                const testimonialContainer = document.getElementById('dynamicTestimonials');
+                
+                container.innerHTML = '<div class="text-center py-4"><div class="spinner"></div><p>Loading reviews...</p></div>';
+                
+                try {
+                    const response = await fetch('/api/reviews/latest');
+                    if (!response.ok) throw new Error('Failed to load reviews');
+                    
+                    const reviews = await response.json();
+                    
+                    // Load user reviews
+                    if (reviews.length === 0) {
+                        container.innerHTML = '<p class="text-center">No reviews yet. Be the first to review!</p>';
+                    } else {
+                        let html = '';
+                        reviews.forEach(review => {
+                            const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                            const date = new Date(review.timestamp).toLocaleDateString();
+                            
+                            html += `
+                                <div class="testimonial bg-[var(--card-bg)] p-4 rounded-lg glow-effect">
+                                    <div class="rating-stars mb-2">${stars}</div>
+                                    <p class="italic">"${review.text}"</p>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <p class="font-semibold">- ${review.name}</p>
+                                        <p class="text-sm opacity-75">${date}</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        container.innerHTML = html;
+                    }
+
+                    // Load testimonials (combine default with user reviews)
+                    const testimonialsResponse = await fetch('/api/testimonials');
+                    if (testimonialsResponse.ok) {
+                        const testimonialsData = await testimonialsResponse.json();
+                        let testimonialsHtml = '';
+                        
+                        testimonialsData.forEach(testimonial => {
+                            const stars = '★'.repeat(testimonial.rating) + '☆'.repeat(5 - testimonial.rating);
+                            testimonialsHtml += `
+                                <div class="testimonial-item p-4">
+                                    <div class="testimonial bg-[var(--card-bg)] p-4 rounded-lg glow-effect">
+                                        <div class="rating-stars mb-2">${stars}</div>
+                                        <p class="italic">"${testimonial.text}"</p>
+                                        <p class="text-right font-semibold mt-2">- ${testimonial.name}</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        testimonialContainer.innerHTML = testimonialsHtml;
+                        // Reinitialize carousel with new testimonials
+                        currentTestimonial = 0;
+                        const newTestimonials = document.querySelectorAll('.testimonial-item');
+                        setInterval(() => {
+                            currentTestimonial = (currentTestimonial + 1) % newTestimonials.length;
+                            showTestimonial(currentTestimonial);
+                        }, 5000);
+                    }
+                } catch (error) {
+                    console.error('Error loading reviews:', error);
+                    container.innerHTML = '<p class="text-center text-red-500">Failed to load reviews. Please try again later.</p>';
+                }
+            }
+
+            // Submit Review Form
+            document.getElementById('reviewFormElement').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('reviewName').value.trim();
+                const text = document.getElementById('reviewText').value.trim();
+                const rating = document.getElementById('reviewRating').value;
+                const confirmation = document.getElementById('reviewConfirmation');
+                
+                if (!name || !text || !rating) {
+                    alert('Please fill all fields');
+                    return;
+                }
+                
+                try {
+                    const response = await fetch('/api/reviews', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            text: text,
+                            rating: parseInt(rating)
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Failed to submit review');
+                    }
+                    
+                    // Clear form and show confirmation
+                    document.getElementById('reviewFormElement').reset();
+                    confirmation.textContent = data.message || 'Thank you for your review!';
+                    confirmation.classList.remove('hidden');
+                    
+                    // Add animation to confirmation message
+                    setTimeout(() => {
+                        confirmation.classList.add('show');
+                    }, 10);
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        confirmation.classList.remove('show');
+                        setTimeout(() => {
+                            confirmation.classList.add('hidden');
+                        }, 500); // Match the CSS transition duration
+                    }, 3000);
+                    
+                    // Reload reviews and testimonials
+                    loadUserReviews();
+                } catch (error) {
+                    console.error('Error submitting review:', error);
+                    alert(error.message || 'Failed to submit review. Please try again later.');
+                }
+            });
+
+            // Auth Modal Management
+            const authModal = document.getElementById('authModal');
+            const authModalContent = document.getElementById('authModalContent');
+            const authBtn = document.getElementById('authBtn');
+            const authStatus = document.getElementById('authStatus');
+
+            // Check auth status on page load
+            function checkAuthStatus() {
+                fetch('/auth/status')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.authenticated) {
+                            authStatus.textContent = 'Logout';
+                            // Enable review submission
+                            document.getElementById('reviewForm').classList.remove('hidden');
+                            document.querySelector('#reviewForm p')?.classList.add('hidden');
+                            // Update info tooltip
+                            document.getElementById('reviewInfoBtn').querySelector('.tooltiptext').textContent = 
+                                'Share your experience with SteganoVault';
+                        } else {
+                            authStatus.textContent = 'Login';
+                            // Disable review submission
+                            document.getElementById('reviewForm').classList.add('hidden');
+                            document.querySelector('#reviewForm p')?.classList.remove('hidden');
+                            // Update info tooltip
+                            document.getElementById('reviewInfoBtn').querySelector('.tooltiptext').textContent = 
+                                'Please login first to submit your review';
+                        }
+                    });
+            }
+
+            // Show auth modal with appropriate content
+            function showAuthModal(content) {
+                authModalContent.innerHTML = content;
+                authModal.style.display = 'block';
+            }
+
+            // Show reset password modal
+            function showResetPasswordModal(content) {
+                document.getElementById('resetPasswordContent').innerHTML = content;
+                modals.resetPassword.style.display = 'block';
+            }
+
+            // Login form
+            function showLoginForm() {
+                const content = `
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Login to SteganoVault</h3>
+                    <form id="loginForm" class="space-y-4">
+                        <div>
+                            <label for="loginEmail" class="block text-sm">Email:</label>
+                            <input type="email" id="loginEmail" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <div>
+                            <label for="loginPassword" class="block text-sm">Password:</label>
+                            <input type="password" id="loginPassword" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <button type="submit" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded w-full">Login</button>
+                        <p class="text-center text-sm">Don't have an account? <a href="#" id="showRegister" class="text-blue-400">Register</a></p>
+                        <p class="text-center text-sm"><a href="#" id="showForgotPassword" class="text-blue-400">Forgot password?</a></p>
+                    </form>
+                `;
+                showAuthModal(content);
+                
+                document.getElementById('loginForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    
+                    fetch('/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            authModal.style.display = 'none';
+                            checkAuthStatus();
+                        }
+                    });
+                });
+                
+                document.getElementById('showRegister').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showRegisterForm();
+                });
+
+                document.getElementById('showForgotPassword').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showForgotPasswordForm();
+                });
+            }
+
+            // Register form with OTP info button
+            function showRegisterForm() {
+                const content = `
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Register for SteganoVault</h3>
+                    <form id="registerForm" class="space-y-4">
+                        <div>
+                            <label for="registerName" class="block text-sm">Name:</label>
+                            <input type="text" id="registerName" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <div>
+                            <label for="registerEmail" class="block text-sm">Email:</label>
+                            <input type="email" id="registerEmail" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <div>
+                            <label for="registerPassword" class="block text-sm">Password:</label>
+                            <input type="password" id="registerPassword" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <button type="submit" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded w-full">Register</button>
+                        <p class="text-center text-sm">Already have an account? <a href="#" id="showLogin" class="text-blue-400">Login</a></p>
+                    </form>
+                `;
+                showAuthModal(content);
+                
+                document.getElementById('registerForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('registerName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const password = document.getElementById('registerPassword').value;
+                    
+                    fetch('/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            showVerificationForm(email);
+                        }
+                    });
+                });
+                
+                document.getElementById('showLogin').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showLoginForm();
+                });
+            }
+
+            // Verification form with OTP info
+            function showVerificationForm(email) {
+                const content = `
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Verify Your Email</h3>
+                    <p class="text-sm mb-4">We've sent a 6-digit code to ${email}. Please enter it below:</p>
+                    <div class="flex items-center mb-2">
+                        <span class="text-sm">Check your spam folder if you don't see the email</span>
+                        <button id="otpInfoBtn" class="text-[var(--text-color)] hover:text-[var(--hover-bg)] text-lg tooltip ml-1">
+                            ℹ️
+                            <span class="tooltiptext">OTP might be in your spam folder. Check there if you don't see it in your inbox.</span>
+                        </button>
+                    </div>
+                    <form id="verifyForm" class="space-y-4">
+                        <input type="hidden" id="verifyEmail" value="${email}">
+                        <div>
+                            <label for="verifyCode" class="block text-sm">Verification Code:</label>
+                            <input type="text" id="verifyCode" class="w-full p-2 border rounded bg-transparent" required maxlength="6">
+                        </div>
+                        <div>
+                            <label for="verifyPassword" class="block text-sm">Password:</label>
+                            <input type="password" id="verifyPassword" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <div>
+                            <label for="verifyName" class="block text-sm">Name:</label>
+                            <input type="text" id="verifyName" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <button type="submit" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded w-full">Verify</button>
+                        <p class="text-center text-sm">Didn't receive code? <a href="#" id="resendCode" class="text-blue-400">Resend</a></p>
+                    </form>
+                `;
+                showAuthModal(content);
+                
+                document.getElementById('verifyForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('verifyEmail').value;
+                    const code = document.getElementById('verifyCode').value;
+                    const password = document.getElementById('verifyPassword').value;
+                    const name = document.getElementById('verifyName').value;
+                    
+                    fetch('/auth/verify', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            otp: code,
+                            password: password,
+                            name: name
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            alert('Email verified successfully! You can now login.');
+                            showLoginForm();
+                        }
+                    });
+                });
+                
+                document.getElementById('resendCode').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('verifyEmail').value;
+                    
+                    fetch('/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: 'resend-only' // Password not needed for resend
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            alert('New verification code sent!');
+                        }
+                    });
+                });
+            }
+
+            // Forgot password form
+            function showForgotPasswordForm() {
+                const content = `
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Reset Password</h3>
+                    <form id="forgotPasswordForm" class="space-y-4">
+                        <div>
+                            <label for="forgotEmail" class="block text-sm">Email:</label>
+                            <input type="email" id="forgotEmail" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <button type="submit" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded w-full">Send Reset Link</button>
+                        <p class="text-center text-sm"><a href="#" id="backToLogin" class="text-blue-400">Back to Login</a></p>
+                    </form>
+                `;
+                showAuthModal(content);
+                
+                document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('forgotEmail').value;
+                    
+                    fetch('/auth/forgot-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            authModal.style.display = 'none';
+                            alert('Password reset link sent to your email!');
+                        }
+                    });
+                });
+                
+                document.getElementById('backToLogin').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showLoginForm();
+                });
+            }
+
+            // Handle password reset from URL token
+            function checkForPasswordResetToken() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const token = urlParams.get('token');
+                
+                if (token) {
+                    showResetPasswordForm(token);
+                }
+            }
+
+            function showResetPasswordForm(token) {
+                const content = `
+                    <h3 class="text-lg sm:text-xl font-semibold mb-4">Reset Your Password</h3>
+                    <form id="resetPasswordForm" class="space-y-4">
+                        <input type="hidden" id="resetToken" value="${token}">
+                        <div>
+                            <label for="newPassword" class="block text-sm">New Password:</label>
+                            <input type="password" id="newPassword" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <div>
+                            <label for="confirmPassword" class="block text-sm">Confirm Password:</label>
+                            <input type="password" id="confirmPassword" class="w-full p-2 border rounded bg-transparent" required>
+                        </div>
+                        <button type="submit" class="bg-[var(--button-bg)] text-white px-4 py-2 rounded w-full">Reset Password</button>
+                    </form>
+                `;
+                showResetPasswordModal(content);
+                
+                document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const token = document.getElementById('resetToken').value;
+                    const newPassword = document.getElementById('newPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    
+                    if (newPassword !== confirmPassword) {
+                        alert('Passwords do not match!');
+                        return;
+                    }
+                    
+                    fetch('/auth/reset-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            token: token,
+                            new_password: newPassword
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            alert('Password updated successfully! You can now login with your new password.');
+                            modals.resetPassword.style.display = 'none';
+                            showLoginForm();
+                        }
+                    });
+                });
+            }
+
+            // Handle logout with notification
+            function handleLogout() {
+                fetch('/auth/logout', {
+                    method: 'POST'
+                })
                 .then(response => response.json())
                 .then(data => {
-                    output.innerHTML = "<p class='text-blue-500'>🔓 Decoded Successfully</p>";
-                    messageContainer.textContent = data.message;
-                    messageContainer.classList.remove("hidden");
-                    resetForm();
-                })
-                .catch(error => {
-                    output.innerHTML = "<p class='text-red-500'>❌ Error decoding file.</p>";
-                    messageContainer.classList.add("hidden");
+                    if (data.message) {
+                        // Show logout notification
+                        const notification = document.createElement('div');
+                        notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg';
+                        notification.textContent = data.notification || 'Logged out successfully';
+                        document.body.appendChild(notification);
+                        
+                        // Remove notification after 3 seconds
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 3000);
+                    }
+                    checkAuthStatus();
                 });
-        }
-
-        // Reset Form Function
-        function resetForm() {
-            document.getElementById("messageInput").value = '';
-            document.getElementById("passwordInput").value = '';
-            fileInput.value = '';
-            fileNameDisplay.textContent = '';
-        }
-
-        // Popup Modal Functionality
-        const modal = document.getElementById('infoModal');
-        const infoBtn = document.getElementById('infoBtn');
-        const closeBtn = document.querySelector('.close');
-
-        infoBtn.addEventListener('click', () => {
-            modal.style.display = 'block';
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
             }
-        });
 
-        // Contributors Animation
-        window.onload = () => {
-            document.querySelector('.contributors').classList.add('show');
-        };
+            // Auth button click handler
+            authBtn.addEventListener('click', function() {
+                if (authStatus.textContent === 'Logout') {
+                    handleLogout();
+                } else {
+                    showLoginForm();
+                }
+            });
+
+            // Initialize auth status check and load reviews
+            checkAuthStatus();
+            loadUserReviews();
+            checkForPasswordResetToken();
+        });
     </script>
 </body>
 </html>
