@@ -1,11 +1,18 @@
-Flask
-Pillow
-stegano
-PyPDF2
-python-docx
-pydub
-opencv-python 
-numpy
-opencv-python>=4.5.0
-mutagen>=1.46.0
-#pip install flask pillow stegano PyPDF2 python-docx pydub
+Flask==2.3.2
+Pillow==9.5.0  # Downgraded from 10.0.0 to match stegano
+stegano==0.11.2
+PyPDF2==3.0.1
+python-docx==0.8.11
+pydub==0.25.1
+opencv-python==4.8.0.76
+numpy==1.25.2
+mutagen==1.46.0
+gunicorn==21.2.0
+google-auth==2.22.0
+google-auth-oauthlib==1.0.0
+google-api-python-client==2.97.0
+python-dotenv==1.0.0  # Added python-dotenv
+google-auth-httplib2==0.1.0
+Flask-Mail==0.9.1
+itsdangerous==2.1.2
+bcrypt==4.0.1
