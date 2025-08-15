@@ -29,6 +29,7 @@ from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadTimeSignat
 from functools import wraps
 import bcrypt
 from supabase import create_client, Client
+from flask import send_from_directory
 
 # Load environment variables from .env file
 load_dotenv()
@@ -929,6 +930,9 @@ def privacy():
     return jsonify({
         "privacy_policy": "SteganoVault does not store your files or messages. All processing happens on the server and files are deleted immediately after."
     })
+@app.route('/static/<path:path>')
+def serve_static(path):
+    return send_from_directory('static', path)
 
 # ========================
 # APPLICATION STARTUP

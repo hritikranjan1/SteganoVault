@@ -19,6 +19,7 @@
             --message-bg: #2d3748;
             --scrollbar-bg: #4a5568;
             --glow-color: #00ffcc;
+            --motion-bg: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%);
         }
 
         [data-theme="light"] {
@@ -30,6 +31,7 @@
             --message-bg: #f7fafc;
             --scrollbar-bg: #cbd5e0;
             --glow-color: #ff6b6b;
+            --motion-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e0 100%);
         }
 
         [data-theme="cyberpunk"] {
@@ -41,6 +43,7 @@
             --message-bg: #1a1433;
             --scrollbar-bg: #00ffcc;
             --glow-color: #ff00ff;
+            --motion-bg: linear-gradient(135deg, #0d0b1e 0%, #1a1433 50%, #ff007a 100%);
         }
 
         [data-theme="retro-spy"] {
@@ -52,6 +55,7 @@
             --message-bg: #3c3c3c;
             --scrollbar-bg: #d4a017;
             --glow-color: #ffd700;
+            --motion-bg: linear-gradient(135deg, #2b2b2b 0%, #3c3c3c 50%, #d4a017 100%);
         }
 
         [data-theme="neon-noir"] {
@@ -63,6 +67,7 @@
             --message-bg: #1e1e1e;
             --scrollbar-bg: #ff1744;
             --glow-color: #00e5ff;
+            --motion-bg: linear-gradient(135deg, #121212 0%, #1e1e1e 50%, #ff1744 100%);
         }
 
         [data-theme="vaporwave"] {
@@ -74,6 +79,7 @@
             --message-bg: #b967ff;
             --scrollbar-bg: #05ffa1;
             --glow-color: #fffb96;
+            --motion-bg: linear-gradient(135deg, #ff71ce 0%, #b967ff 50%, #05ffa1 100%);
         }
 
         [data-theme="steampunk"] {
@@ -85,6 +91,7 @@
             --message-bg: #3f2a1d;
             --scrollbar-bg: #d4a017;
             --glow-color: #ffcc80;
+            --motion-bg: linear-gradient(135deg, #2c1e15 0%, #3f2a1d 50%, #8b5523 100%);
         }
 
         [data-theme="hacker-terminal"] {
@@ -96,6 +103,7 @@
             --message-bg: #1a1a1a;
             --scrollbar-bg: #00ff00;
             --glow-color: #00ff00;
+            --motion-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #00cc00 100%);
         }
 
         [data-theme="cosmic-galaxy"] {
@@ -107,6 +115,7 @@
             --message-bg: #1b263b;
             --scrollbar-bg: #778da9;
             --glow-color: #ff00ff;
+            --motion-bg: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #778da9 100%);
         }
 
         [data-theme="minimal-zen"] {
@@ -118,6 +127,7 @@
             --message-bg: #ffffff;
             --scrollbar-bg: #cccccc;
             --glow-color: #66ccff;
+            --motion-bg: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #cccccc 100%);
         }
 
         [data-theme="glitchcore"] {
@@ -129,6 +139,7 @@
             --message-bg: #1a0000;
             --scrollbar-bg: #ff00ff;
             --glow-color: #ff00ff;
+            --motion-bg: linear-gradient(135deg, #000000 0%, #1a0000 50%, #00ffff 100%);
         }
 
         body {
@@ -141,6 +152,272 @@
             padding: 0.5rem;
             font-family: 'Courier New', monospace;
             overflow-x: hidden;
+        }
+
+        /* Motion Background Styles */
+        .motion-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--motion-bg);
+            background-size: 400% 400%;
+            animation: gradientMotion 15s ease infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes gradientMotion {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Cyberpunk Grid Animation */
+        .cyberpunk-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(var(--glow-color-rgb), 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(var(--glow-color-rgb), 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gridScroll {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        /* Retro Spy Scanlines */
+        .retro-scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent,
+                    transparent 1px,
+                    rgba(var(--glow-color-rgb), 0.05) 2px,
+                    rgba(var(--glow-color-rgb), 0.05) 3px
+                );
+            animation: scanlineScroll 0.5s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes scanlineScroll {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 4px;
+            }
+        }
+
+        /* Neon Noir Particles */
+        .neon-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .neon-particle {
+            position: absolute;
+            background-color: var(--glow-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatParticles linear infinite;
+        }
+
+        @keyframes floatParticles {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Vaporwave Waves */
+        .vaporwave-waves {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .vaporwave-wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 10%;
+            background: linear-gradient(90deg, var(--button-bg), var(--hover-bg), var(--button-bg));
+            opacity: 0.2;
+            animation: waveAnimation 10s linear infinite;
+        }
+
+        .vaporwave-wave:nth-child(2) {
+            animation-delay: -5s;
+            opacity: 0.1;
+            height: 15%;
+        }
+
+        @keyframes waveAnimation {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Hacker Terminal Code Rain */
+        .code-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .code-column {
+            position: absolute;
+            top: -100%;
+            width: 1em;
+            color: var(--glow-color);
+            font-family: monospace;
+            text-shadow: 0 0 5px var(--glow-color);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            animation: codeFall linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes codeFall {
+            to {
+                top: 100%;
+            }
+        }
+
+        /* Cosmic Galaxy Stars */
+        .cosmic-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .cosmic-star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+            opacity: 0.3;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.1;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Glitchcore Glitch Effect */
+        .glitch-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--bg-color);
+            opacity: 0.1;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--motion-bg);
+            mix-blend-mode: overlay;
+            opacity: 0.1;
+        }
+
+        .glitch-effect::before {
+            animation: glitch 2s infinite linear alternate-reverse;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .glitch-effect::after {
+            animation: glitch 2s infinite linear alternate-reverse;
+            animation-delay: 1s;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(-5px);
+            }
+            40% {
+                transform: translateX(5px);
+            }
+            60% {
+                transform: translateX(-5px);
+            }
+            80% {
+                transform: translateX(5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
 
         .motion-fade {
@@ -679,7 +956,15 @@
 </head>
 
 <body class="flex flex-col items-center justify-between">
-    <div class="background-animation"></div>
+    <!-- Motion Background Elements -->
+    <div class="motion-background"></div>
+    <div id="cyberpunkGrid" class="cyberpunk-grid hidden"></div>
+    <div id="retroScanlines" class="retro-scanlines hidden"></div>
+    <div id="neonParticles" class="neon-particles hidden"></div>
+    <div id="vaporwaveWaves" class="vaporwave-waves hidden"></div>
+    <div id="codeRain" class="code-rain hidden"></div>
+    <div id="cosmicStars" class="cosmic-stars hidden"></div>
+    <div id="glitchEffect" class="glitch-effect hidden"></div>
 
     <!-- Navigation Bar -->
     <nav class="w-full flex flex-col sm:flex-row justify-between items-center mb-4 mt-2 px-2 sm:px-4">
@@ -1128,11 +1413,174 @@
                 console.error("EmailJS SDK failed to load. Check network or CDN URL.");
             }
 
-            // Theme Switcher
+            // Theme Switcher with background effects
             const themeToggle = document.getElementById('theme-toggle');
+            const backgroundElements = {
+                cyberpunkGrid: document.getElementById('cyberpunkGrid'),
+                retroScanlines: document.getElementById('retroScanlines'),
+                neonParticles: document.getElementById('neonParticles'),
+                vaporwaveWaves: document.getElementById('vaporwaveWaves'),
+                codeRain: document.getElementById('codeRain'),
+                cosmicStars: document.getElementById('cosmicStars'),
+                glitchEffect: document.getElementById('glitchEffect')
+            };
+
+            // Hide all background elements initially
+            Object.values(backgroundElements).forEach(el => el.classList.add('hidden'));
+
             themeToggle.addEventListener('change', function() {
-                document.documentElement.setAttribute('data-theme', this.value);
+                const theme = this.value;
+                document.documentElement.setAttribute('data-theme', theme);
+                
+                // Hide all background elements first
+                Object.values(backgroundElements).forEach(el => el.classList.add('hidden'));
+                
+                // Clear any existing particles or effects
+                clearParticles();
+                clearCodeRain();
+                clearStars();
+                
+                // Show theme-specific background effects
+                switch(theme) {
+                    case 'cyberpunk':
+                        backgroundElements.cyberpunkGrid.classList.remove('hidden');
+                        createParticles(30, 'neon-particles', 'var(--glow-color)');
+                        break;
+                    case 'retro-spy':
+                        backgroundElements.retroScanlines.classList.remove('hidden');
+                        break;
+                    case 'neon-noir':
+                        createParticles(50, 'neon-particles', 'var(--glow-color)');
+                        break;
+                    case 'vaporwave':
+                        backgroundElements.vaporwaveWaves.classList.remove('hidden');
+                        break;
+                    case 'hacker-terminal':
+                        backgroundElements.codeRain.classList.remove('hidden');
+                        createCodeRain();
+                        break;
+                    case 'cosmic-galaxy':
+                        backgroundElements.cosmicStars.classList.remove('hidden');
+                        createStars();
+                        break;
+                    case 'glitchcore':
+                        backgroundElements.glitchEffect.classList.remove('hidden');
+                        break;
+                    default:
+                        // For other themes, just use the gradient background
+                        break;
+                }
             });
+
+            // Particle creation functions
+            function createParticles(count, containerClass, color) {
+                const container = document.querySelector(`.${containerClass}`);
+                container.innerHTML = '';
+                
+                for (let i = 0; i < count; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('neon-particle');
+                    
+                    // Random properties
+                    const size = Math.random() * 5 + 1;
+                    const posX = Math.random() * window.innerWidth;
+                    const posY = Math.random() * window.innerHeight;
+                    const duration = Math.random() * 10 + 5;
+                    const delay = Math.random() * 5;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${posX}px`;
+                    particle.style.top = `${posY}px`;
+                    particle.style.animationDuration = `${duration}s`;
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.backgroundColor = color;
+                    
+                    container.appendChild(particle);
+                }
+            }
+
+            function clearParticles() {
+                const containers = document.querySelectorAll('.neon-particles');
+                containers.forEach(container => {
+                    container.innerHTML = '';
+                });
+            }
+
+            // Code rain effect for hacker terminal theme
+            function createCodeRain() {
+                const container = document.querySelector('.code-rain');
+                container.innerHTML = '';
+                const columns = Math.floor(window.innerWidth / 20);
+                
+                for (let i = 0; i < columns; i++) {
+                    const column = document.createElement('div');
+                    column.classList.add('code-column');
+                    
+                    // Random properties
+                    const left = Math.random() * window.innerWidth;
+                    const duration = Math.random() * 5 + 5;
+                    const delay = Math.random() * 5;
+                    const length = Math.floor(Math.random() * 20) + 10;
+                    
+                    column.style.left = `${left}px`;
+                    column.style.animationDuration = `${duration}s`;
+                    column.style.animationDelay = `${delay}s`;
+                    
+                    // Create random "code" characters
+                    let codeText = '';
+                    for (let j = 0; j < length; j++) {
+                        // Randomly choose between 0/1 or Japanese characters
+                        if (Math.random() > 0.5) {
+                            codeText += Math.floor(Math.random() * 2);
+                        } else {
+                            // Random Japanese character (Katakana range)
+                            codeText += String.fromCharCode(0x30A0 + Math.floor(Math.random() * 96));
+                        }
+                    }
+                    
+                    column.textContent = codeText;
+                    container.appendChild(column);
+                }
+            }
+
+            function clearCodeRain() {
+                const container = document.querySelector('.code-rain');
+                container.innerHTML = '';
+            }
+
+            // Stars for cosmic galaxy theme
+            function createStars() {
+                const container = document.querySelector('.cosmic-stars');
+                container.innerHTML = '';
+                const starCount = 100;
+                
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('cosmic-star');
+                    
+                    // Random properties
+                    const size = Math.random() * 3;
+                    const posX = Math.random() * window.innerWidth;
+                    const posY = Math.random() * window.innerHeight;
+                    const duration = Math.random() * 3 + 1;
+                    const delay = Math.random() * 5;
+                    
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    star.style.left = `${posX}px`;
+                    star.style.top = `${posY}px`;
+                    star.style.animationDuration = `${duration}s`;
+                    star.style.animationDelay = `${delay}s`;
+                    
+                    container.appendChild(star);
+                }
+            }
+
+            function clearStars() {
+                const container = document.querySelector('.cosmic-stars');
+                container.innerHTML = '';
+            }
 
             // Drag & Drop Feature
             const dropArea = document.getElementById("drop-area");
@@ -2064,6 +2512,9 @@
             // Initialize auth status check and load reviews
             checkAuthStatus();
             loadUserReviews();
+
+            // Initialize theme with motion background
+            themeToggle.dispatchEvent(new Event('change'));
         });
     </script>
 </body>
