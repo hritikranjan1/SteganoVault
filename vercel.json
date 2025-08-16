@@ -7,7 +7,7 @@
       "config": {
         "pythonVersion": "3.10",
         "maxLambdaSize": "50mb",
-        "includeFiles": "static/**"
+        "forcePythonVersion": "3.10"
       }
     }
   ],

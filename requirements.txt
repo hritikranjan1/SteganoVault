@@ -9,7 +9,7 @@ numpy==1.25.2
 mutagen==1.46.0
 gunicorn==21.2.0
 google-auth==2.22.0
-google-auth-oauthlib==0.7.1  # Downgraded for compatibility
+google-auth-oauthlib==0.7.1
 google-api-python-client==2.97.0
 python-dotenv==1.0.0
 google-auth-httplib2==0.1.0
