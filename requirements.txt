@@ -1,6 +1,6 @@
 Flask==2.3.2
 Pillow==10.1.0
-stegano==0.11.5  # Must use this specific version
+stegano==0.11.5
 PyPDF2==3.0.1
 python-docx==0.8.11
 pydub==0.25.1
@@ -9,7 +9,7 @@ numpy==1.25.2
 mutagen==1.46.0
 gunicorn==21.2.0
 google-auth==2.22.0
-google-auth-oauthlib==1.0.0
+google-auth-oauthlib==0.7.1  # Downgraded for compatibility
 google-api-python-client==2.97.0
 python-dotenv==1.0.0
 google-auth-httplib2==0.1.0
